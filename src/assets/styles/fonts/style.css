@@ -1,0 +1,194 @@
+@font-face {
+  font-family: 'tdIcon';
+  src:
+    url('fonts/tdIcon.ttf?2v0tk5') format('truetype'),
+    url('fonts/tdIcon.woff?2v0tk5') format('woff'),
+    url('fonts/tdIcon.svg?2v0tk5#tdIcon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.tdIcon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'tdIcon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tdIcon-attack-range:before {
+  content: "\e90c";
+}
+.tdIcon-attack-rate:before {
+  content: "\e904";
+}
+.tdIcon-battle-uses:before {
+  content: "\e905";
+}
+.tdIcon-damage-blast:before {
+  content: "\e906";
+}
+.tdIcon-damage-duration:before {
+  content: "\e907";
+}
+.tdIcon-damage-sword:before {
+  content: "\e909";
+}
+.tdIcon-damage-type:before {
+  content: "\e908";
+}
+.tdIcon-double-damage:before {
+  content: "\e90a";
+}
+.tdIcon-dps:before {
+  content: "\e900";
+}
+.tdIcon-duration:before {
+  content: "\e90b";
+}
+.tdIcon-hearts:before {
+  content: "\e901";
+}
+.tdIcon-higher-chance-of-critical-hit:before {
+  content: "\e90d";
+}
+.tdIcon-immobilize:before {
+  content: "\e90e";
+}
+.tdIcon-increase-attack-by:before {
+  content: "\e90f";
+}
+.tdIcon-increase-chance-of-fiend-souls:before {
+  content: "\e910";
+}
+.tdIcon-increase-speed-by:before {
+  content: "\e911";
+}
+.tdIcon-make-fiends:before {
+  content: "\e912";
+}
+.tdIcon-mana-regeneration-rate:before {
+  content: "\e913";
+}
+.tdIcon-more-refund-when-selling-tower:before {
+  content: "\e914";
+}
+.tdIcon-number-of-fiends-hit:before {
+  content: "\e915";
+}
+.tdIcon-number-of-fiends-to-convert-to-bring-to-your-team:before {
+  content: "\e916";
+}
+.tdIcon-poison:before {
+  content: "\e918";
+}
+.tdIcon-poison-duration:before {
+  content: "\e917";
+}
+.tdIcon-reduce-cost-of-mana:before {
+  content: "\e919";
+}
+.tdIcon-reduce-health:before {
+  content: "\e91a";
+}
+.tdIcon-reduce-magic-resistance-by:before {
+  content: "\e91b";
+}
+.tdIcon-seconds:before {
+  content: "\e902";
+}
+.tdIcon-slowdown:before {
+  content: "\e91d";
+}
+.tdIcon-slowdown-duration:before {
+  content: "\e91c";
+}
+.tdIcon-target-fiends:before {
+  content: "\e920";
+}
+.tdIcon-towers:before {
+  content: "\e903";
+}
+.tdIcon-uses:before {
+  content: "\e91e";
+}
+.tdIcon-variant:before {
+  content: "\e91f";
+}
+.tdIcon-random-spell:before {
+  content: "\e921";
+}
+.tdIcon-faster-spawn:before {
+  content: "\e922";
+}
+.tdIcon-more-spawn:before {
+  content: "\e923";
+}
+.tdIcon-ability-interval:before {
+  content: "\e924";
+}
+.tdIcon-damage-multiplier:before {
+  content: "\e925";
+}
+.tdIcon-soul-token:before {
+  content: "\e926";
+}
+.tdIcon-physical-res:before {
+  content: "\e927";
+}
+.tdIcon-magical-res:before {
+  content: "\e928";
+}
+.tdIcon-random-tower:before {
+  content: "\e929";
+}
+.tdIcon-less-mana:before {
+  content: "\e92a";
+}
+.tdIcon-melee-damage:before {
+  content: "\e92b";
+}
+.tdIcon-stronger-damage:before {
+  content: "\e92c";
+}
+.tdIcon-immune-to-imobilization:before {
+  content: "\e92d";
+}
+.tdIcon-speed:before {
+  content: "\e92e";
+}
+.tdIcon-backslide-duration:before {
+  content: "\e92f";
+}
+.tdIcon-ranged-damage:before {
+  content: "\e930";
+}
+.tdIcon-melee:before {
+  content: "\e931";
+}
+.tdIcon-lock-on-damage:before {
+  content: "\e932";
+}
+.tdIcon-higer-hp:before {
+  content: "\e933";
+}
+.tdIcon-ranged:before {
+  content: "\e934";
+}
+.tdIcon-add-mana:before {
+  content: "\e935";
+}
+.tdIcon-hit-points:before {
+  content: "\e936";
+}
+.tdIcon-fatigue:before {
+  content: "\e937";
+}

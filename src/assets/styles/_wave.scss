@@ -1,0 +1,120 @@
+@use 'variables' as *;
+
+%wavePseudoStyles {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  transition: opacity 0.2s linear;
+}
+
+.wave {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  &-selected {
+    .wave__image:after,
+    .wave__imageInner:after {
+      opacity: 1;
+    }
+
+    .wave__image:before,
+    .wave__imageInner:before {
+      opacity: 0;
+    }
+  }
+
+  &__image {
+    flex: none;
+    width: calc(165 / 240 * 100%);
+    aspect-ratio: 165/200;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    @media screen and (max-width: $mediaSm) {
+      margin-bottom: 8px;
+    }
+    &:before,
+    &:after {
+      @extend %wavePseudoStyles;
+    }
+
+    &:before {
+      background-image: url(~src/assets/images/deckBuilder/waveBInActive.png);
+      z-index: 3;
+    }
+
+    &:after {
+      background-image: url(~src/assets/images/deckBuilder/waveBActive.png);
+      opacity: 0;
+      z-index: 3;
+    }
+  }
+
+  &__imageInner {
+    flex: none;
+    width: 90%;
+    aspect-ratio: 14 /17;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+
+    img {
+      position: relative;
+      z-index: 4;
+      object-fit: contain;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    &:before,
+    &:after {
+      @extend %wavePseudoStyles;
+    }
+
+    &:before {
+      background-image: url(~src/assets/images/deckBuilder/waveBgInactive.png);
+      z-index: 3;
+    }
+
+    &:after {
+      background-image: url(~src/assets/images/deckBuilder/waveBgActive.png);
+      opacity: 0;
+      z-index: 3;
+    }
+  }
+  &__name,
+  &__info {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    @media screen and (max-width: $mediaSm) {
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+  }
+  &__name {
+    color: #ffffff;
+    margin-bottom: 8px;
+    @media screen and (max-width: $mediaSm) {
+      margin-bottom: 4px;
+    }
+  }
+  &__info {
+    color: #f3a308;
+  }
+}

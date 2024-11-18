@@ -1,0 +1,421 @@
+@use 'variables' as *;
+
+
+.smallNavContainerSoul {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: clampF(40, 120);
+}
+
+.miniNavContainer {
+  display: flex;
+  gap: clampF(12, 48);
+  align-items: center;
+}
+
+
+.titleGlobalTicket {
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+}
+
+.ticketOrSoul {
+  display: flex;
+  align-items: flex-end;
+  gap: clampF(8, 16);
+
+  &--indentationRight {
+    padding-right: 7.5%;
+  }
+
+  &--mt {
+    margin-top: auto;
+  }
+}
+
+.indentationBottom {
+  align-items: center;
+}
+
+
+.dropdownContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.titleDropdown {
+  font-family: Caladea, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.selectDropdown {
+  position: relative;
+  border: solid 2px #D88317;
+  width: clampF(100, 216);
+  height: clampF(30, 56);
+
+  span {
+    position: absolute;
+    color: white;
+    pointer-events: none;
+    background: url("/assets/images/souls/panel_bg.png");
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-transform: uppercase;
+  }
+
+  select {
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    color: #D88317;
+    border: none;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    option {
+      visibility: hidden;
+    }
+  }
+}
+
+.soulCardsNav {
+  margin-top: 0;
+}
+
+.myButtonBack {
+  display: flex;
+  height: clampF(40, 84);
+  width: clampF(54, 133);
+  align-items: center;
+}
+
+
+@media(max-width: 800px) {
+  .ticketOrSoul {
+    gap: 10px;
+  }
+  .miniNavContainer {
+    gap: 20px;
+  }
+  .balanceButtonsIsMobile {
+    align-items: center;
+    justify-content: space-between;
+
+    div {
+      margin: 0;
+    }
+  }
+  .mtClamp {
+    margin-top: clampF(10, 0);
+  }
+}
+
+
+@media(max-width: 680px) {
+  .btn__nav {
+    width: clampF(140, 376);
+
+    span {
+      width: clampF(140, 376);
+      display: block;
+    }
+  }
+}
+
+
+.ticket-shop, .forces-command {
+  padding: clampF(16, 32);
+  background: #042735;
+  width: clampF(285, 576);
+  border-radius: clampF(16, 32);
+  border: solid 2px #3F89A0;
+  margin: clampF(15, 30) 0;
+  .purchased{
+    gap: clampF(3,6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clampF(12, 24);
+    font-weight: 700;
+    line-height: clampF(14, 28);
+    color: #FBEC98;
+    text-transform: uppercase;
+    background-image: url("/assets/images/soulshop/purchased-bg.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: clampF(120,240);
+    padding: clampF(6,12);
+    margin: 0 auto;
+    img{
+      width: 36px;
+      height: 32px;
+    }
+  }
+  .image-input-container {
+    display: flex;
+
+    .input-container {
+      .amount {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: clampF(8,16);
+        font-size: clampF(36, 72);
+        font-weight: 700;
+        line-height: clampF(40, 80);
+        color: white;
+        margin-bottom: clampF(6, 12);
+        text-transform: uppercase;
+        span{
+          font-size: clampF(24,48);
+          line-height: clampF(28,56);
+        }
+      }
+
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .arrow-container {
+        position: relative;
+
+        button {
+          right: 10px;
+          border: none;
+          background-repeat: no-repeat;
+          background-color: transparent;
+          position: absolute;
+          background-size: contain;
+          cursor: pointer;
+          width: clampF(9, 18);
+          height: clampF(5, 10);
+
+          &.arrow-top {
+            background-image: url("/assets/images/soulshop/arrow-top.png");
+            top: 20%;
+          }
+
+          &.arrow-bottom {
+            background-image: url("/assets/images/soulshop/arrow-bottom.png");
+            top: 60%;
+          }
+        }
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+
+      input.box-open {
+        min-width: clampF(85, 216);
+        min-height: clampF(32, 64);
+        font-family: Caladea, sans-serif;
+        font-weight: 700;
+        padding: clampF(5, 10) clampF(20, 40) clampF(5, 10) clampF(6, 12);
+        border: 2px #D88317 solid;
+        border-radius: clampF(8, 16);
+        background: inherit;
+        color: #FFFFFF;
+        font-size: clampF(16, 32);
+        line-height: clampF(24, 48);
+
+        &--ticket {
+          min-width: unset;
+          width: 100%;
+          max-width: clampF(120, 200);
+        }
+
+
+        &:focus-visible {
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+    }
+
+    .image-container {
+      div {
+        width: clampF(100, 200);
+        height: clampF(100, 200);
+        margin: 0;
+      }
+    }
+  }
+
+  .label-total {
+    color: #FFFFFF;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: clampF(12, 24);
+    font-weight: 700;
+    line-height: clampF(16, 32);
+    margin: clampF(8, 16) 0 clampF(12, 24) 0;
+    gap: clampF(4, 8);
+
+    img {
+      width: clampF(22, 44);
+      height: clampF(22, 44);
+      object-fit: contain;
+      background-position: center;
+    }
+  }
+
+  .total-price-container {
+    width: 20%;
+    border: none;
+    background: transparent;
+    text-align: left;
+    color: #FFFFFF;
+    font-size: clampF(12, 22);
+    font-weight: 600;
+    line-height: clampF(14, 30);
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+
+    &--center {
+      justify-content: center;
+    }
+
+    button {
+      font-family: Caladea, sans-serif;
+      font-size: clampF(8, 16);
+      font-weight: 700;
+      line-height: clampF(12, 24);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      width: clampF(120, 240);
+      height: clampF(32, 64);
+
+      div {
+        text-align: left;
+        width: 75%;
+        margin-left: auto;
+      }
+
+      .title {
+        font-size: clampF(12, 24);
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+.forces-command {
+  border: none;
+  background: inherit;
+  font-family: Caladea, sans-serif;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title-command {
+    font-weight: 700;
+    font-size: clampF(24, 48);
+    line-height: clampF(28, 56);
+    text-align: center;
+  }
+
+  .input-button-container {
+    display: flex;
+    gap: clampF(12, 24);
+    margin-bottom: clampF(12, 24);
+    align-items: flex-end;
+
+    .open-button {
+      width: clampF(110, 220);
+      height: clampF(32, 64);
+      font-weight: bold;
+      background: linear-gradient(180deg, #1ED224 0%, #2BB23D 50%, #03783C 100%);
+      border: 2px solid #2FAA5B;
+      font-size: clampF(16, 32);
+      line-height: clampF(24, 48);
+      color: white;
+      border-radius: 16px;
+      text-align: center;
+      &:disabled {
+        background: linear-gradient(180deg, #888888 0%, #737373 50%, #575757 100%);
+        border: 2px solid #575757;
+        color: #e7e7e7;
+        cursor: not-allowed;
+      }
+    }
+
+    .placeholder {
+      font-size: clampF(8, 16);
+      font-weight: 700;
+      line-height: clampF(16, 32);
+      color: #8F5EC9;
+      margin-bottom: clampF(6, 12);
+      position: relative;
+      left: -15%;
+    }
+  }
+
+  .inventory-container {
+    font-weight: 400;
+    align-items: center;
+    text-align: center;
+    font-size: clampF(16, 32);
+    line-height: clampF(20, 40);
+    display: flex;
+    gap: clampF(12, 24);
+    justify-content: center;
+    margin-top: clampF(20, 40);
+    margin-bottom: clampF(16, 32);
+  }
+
+  .input-container {
+    input {
+      width: clampF(88, 176) !important;
+      height: clampF(26, 52) !important;
+      border: 2px solid #8F5EC9 !important;
+    }
+
+    .arrow-container {
+      button {
+        &.arrow-top {
+          background-image: url("/assets/images/soulshop/top-multiple.png") !important;
+        }
+
+        &.arrow-bottom {
+          background-image: url("/assets/images/soulshop/bottom-multiple.png") !important;
+        }
+      }
+    }
+  }
+
+
+}

@@ -1,0 +1,39 @@
+@use 'variables' as *;
+
+.difficulty {
+  aspect-ratio: 596/412;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/home/difficultyImg.png);
+  @extend %CNRBGimage;
+
+  &__content {
+    font-family: 'Aclonica', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: clampF(20, 96);
+    line-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #0f6643;
+    -webkit-text-stroke: minF(2) #9df6e4;
+    position: absolute;
+    top: 50%;
+  }
+
+  &__progress {
+    width: calc(140 / 149 * 100%);
+    aspect-ratio: 560/74;
+    position: relative;
+    z-index: 9;
+    margin: auto auto 0;
+  }
+}

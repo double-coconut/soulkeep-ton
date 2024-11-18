@@ -1,0 +1,18 @@
+<div class="app-wrapper">
+  <router-outlet></router-outlet>
+  <app-loading *ngIf="showLoader"></app-loading>
+  <app-loading-overlay></app-loading-overlay>
+  <div>
+    <div #popup></div>
+  </div>
+  <div class="deviceOrientation">
+    <div class="phone">
+      <div class="inner"></div>
+      <div class="logoBlock"></div>
+    </div>
+    <div class="message">
+      Please rotate your device!
+    </div>
+  </div>
+
+</div>

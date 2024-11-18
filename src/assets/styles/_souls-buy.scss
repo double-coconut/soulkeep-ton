@@ -1,0 +1,74 @@
+@use 'variables' as *;
+
+.soul-buy-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clampF(40, 120);
+  padding: clampF(10, 40);
+
+  &--item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: clampF(120, 240);
+    height: 100%;
+
+    &--text {
+      color: #FFF;
+      font-size: clampF(28, 56);
+      font-weight: 700;
+      line-height: 120%;
+      text-transform: uppercase;
+    }
+
+    &--image {
+      width: 100%;
+      height: clampF(50, 200);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      margin: clampF(10, 40) 0 clampF(6, 24) 0;
+
+      &.soul_1 {
+        background-image: url("../images/souls/soul1.png");
+      }
+
+      &.soul_2 {
+        background-image: url("../images/souls/soul2.png");
+      }
+
+      &.soul_3 {
+        background-image: url("../images/souls/soul3.png");
+      }
+    }
+
+    &--button-container {
+      width: 100%;
+
+      button {
+        background-color: transparent;
+        width: clampF(120, 240);
+        height: clampF(32, 64);
+        border: none;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url("../images/souls/soul-button-bg.png");
+        color: #FCF099;
+        font-size: clampF(16, 32);
+        font-weight: 700;
+        line-height: 120%;
+        text-transform: uppercase;
+
+        &:hover, &::selection, &:active {
+          filter: brightness(1.5);
+        }
+        &:disabled {
+          filter: grayscale(0.9);
+        }
+      }
+    }
+  }
+}

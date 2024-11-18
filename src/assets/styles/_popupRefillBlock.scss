@@ -1,0 +1,59 @@
+@use 'variables' as *;
+
+.refillBlock {
+  flex: none;
+  width: max(230px, minF(752));
+  aspect-ratio: 752/235;
+  max-width: 752px;
+  position: relative;
+  z-index: 4;
+  background-image: url(~src/assets/images/deckBuilder/refillBlockTimeBg.png);
+  @extend %CNRBGimage;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: min(minF(16), 16px);
+  margin-top: 10%;
+
+  &__title {
+    font-weight: 700;
+    font-size: clamp(12px, minF(32), 32px);
+    letter-spacing: minF(2);
+    line-height: 112%;
+    margin-top: 7%;
+    text-transform: uppercase;
+    color: #2095c4;
+  }
+
+  &__time {
+    font-weight: 700;
+    font-size: clamp(16px, minF(64), 64px);
+    line-height: 84%;
+    color: #ffffff;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: calc(603 / 752 * 100%);
+    aspect-ratio: 603/300;
+    z-index: 2;
+    bottom: 100%;
+    align-self: center;
+    background-image: url(~src/assets/images/deckBuilder/refillBlockDecal.png);
+    @extend %CNRBGimage;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: calc(277 / 752 * 100%);
+    aspect-ratio: 277/280;
+    z-index: 4;
+    top: -80%;
+    align-self: center;
+    background-image: url(~src/assets/images/deckBuilder/refillBlockRetreat.png);
+    @extend %CNRBGimage;
+  }
+}

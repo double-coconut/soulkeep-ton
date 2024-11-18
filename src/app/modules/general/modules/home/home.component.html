@@ -1,0 +1,206 @@
+
+<div class="hP hP-grid">
+  <div class="hP__balance">
+
+    <app-souls-balance></app-souls-balance>
+
+    <div class="balance--username-wrap">
+      <div class="balance balance--username">
+        <div class="balance__avatar">
+          <ng-container
+            *ngIf="userAvatar$ | async as avatar; else defaultImage"
+          >
+            <div class="balance__avatar__frame">
+              <img
+                *ngIf="avatar.avatar_frame as frame"
+                [src]="frame"
+                alt=""
+                class="balance__avatar__img"
+              />
+            </div>
+            <div class="balance__avatar__media">
+              <img
+                [src]="avatar.profile_image"
+                alt=""
+                class="balance__avatar__img"
+              />
+            </div>
+          </ng-container>
+          <ng-template #defaultImage>
+            <div class="balance__avatar__media">
+              <img
+                [src]="'/assets/images/home/avatar-holder.png'"
+                alt=""
+                class="balance__avatar__img"
+              />
+            </div>
+          </ng-template>
+        </div>
+        <div class="balance__data">{{ clientMe?.username }}</div>
+      </div>
+      <button class="balance-logout" (click)="handleLogout()"></button>
+    </div>
+  </div>
+
+  <div class="hP__hints">
+    <button
+      (click)="goToSurvey()"
+      class="btn btn__hint btn__hint-FAQ"
+      ontouchstart=""
+    ></button>
+    <button
+      class="btn btn__hint btn__hint-battleLog disabled"
+      routerLink="battle-log"
+    ></button>
+  </div>
+
+  <div class="hP__logo">
+    <div class="logoBlock"></div>
+  </div>
+  <div class="hP__settings disabled">
+    <button
+      class="btn settingsBlock"
+      ontouchstart=""
+    ></button>
+  </div>
+  <div class="hP__diff">
+    <div class="difficulty">
+      <div class="titleFrame">
+        <svg viewBox="0 0 600 600">
+          <path
+            d="M0,280 C200,200 400,200 600,280"
+            fill="transparent"
+            id="curve"
+          />
+          <text fill="#fcfcfd">
+            <textPath
+              dominant-baseline="middle"
+              startOffset="50%"
+              text-anchor="middle"
+              xlink:href="#curve"
+            >
+              LEAGUE
+            </textPath>
+          </text>
+        </svg>
+      </div>
+      <div class="difficulty__content" routerLink="leagues">
+        {{ currentLeague?.order ?? '' }}
+      </div>
+      <div class="difficulty__progress">
+        <div
+          [attr.dataLevel]="
+            clientMe?.isFfa ? 'NEXT LEAGUE READY' : gatewayLevel
+          "
+          class="progressBar progressBar--content"
+          [class.lineVisible]="!clientMe?.isFfa"
+        >
+          <div class="progressBar__inner">
+            <div
+              [style.width.%]="
+                clientMe?.isFfa
+                  ? 100
+                  : ((clientMe?.level?.order || 0) * 100) / levelsCount
+              "
+              class="progressBar__slide"
+            ></div>
+            <div class="progressBar__lines">
+              <div
+                *ngFor="let bar of levelsCount - 1 | toArray; let i = index"
+                [class.progressBar__line--active]="
+                  i < (clientMe?.level?.order || 0)
+                "
+                class="progressBar__line"
+              ></div>
+            </div>
+          </div>
+          <div class="progressBar__content"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hP__battle">
+    <button
+      disabled
+      class="btn btn__battle"
+      ontouchstart=""
+    >
+      <div class="btn__battle__inner">
+        <span> BATTLE </span>
+      </div>
+    </button>
+  </div>
+
+  <div class="hP__packs">
+    <button
+      routerLink="tournaments"
+      class="btn btn__stateOne disabled btn__stateOne__tournaments btn__stateOne--img"
+      ontouchstart=""
+    >
+      <div class="btn__stateOne__inner">
+        <span> Tournaments </span>
+      </div>
+    </button>
+  </div>
+
+  <div class="hP__btn-market"
+  >
+    <button
+      class="btn btn__secondary btn__secondary-small btn__secondary-left btn__secondary-market"
+      ontouchstart=""
+      routerLink="soul-market"
+    >
+      <span>SOUL MARKET</span>
+      <div class="btn__secondary__imageBlock"></div>
+    </button>
+  </div>
+
+  <div class="hP__btn-leagues">
+    <button
+      class="btn btn__secondary disabled btn__secondary-leagues"
+      ontouchstart=""
+      routerLink="leagues"
+    >
+      <span>leagues</span>
+      <div class="btn__secondary__imageBlock">
+        <div class="avatar__wrapper">
+          <img
+            alt=" disabled avatar image"
+            class="avatar__imageBack"
+            src="../../../../../assets/images/league/avatars/Background-{{
+              (clientMe?.league?.order ?? 0) - 1
+            }}.png"
+          />
+          <img
+            alt=" active avatar image"
+            class="avatar__imageFront"
+            src="../../../../../assets/images/league/avatars/Avatar-{{
+              (clientMe?.league?.order ?? 0) - 1
+            }}.png"
+          />
+        </div>
+      </div>
+    </button>
+  </div>
+
+  <div class="hP__btn-souls">
+    <button
+      class="btn btn__secondary btn__secondary-big disabled btn__secondary-left btn__secondary-souls"
+      routerLink="/soul-shop"
+      ontouchstart=""
+    >
+      <span>Game Shop</span>
+      <div class="btn__secondary__imageBlock"></div>
+    </button>
+  </div>
+  <div class="hP__btn-defenses">
+    <button
+      class="btn btn__secondary btn__secondary-big disabled btn__secondary-right btn__secondary-defenses"
+      routerLink="my-defenses"
+      ontouchstart=""
+    >
+      <span>My Defenses</span>
+      <div class="btn__secondary__imageBlock"></div>
+    </button>
+  </div>
+</div>

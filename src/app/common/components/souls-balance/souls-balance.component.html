@@ -1,0 +1,8 @@
+<div class="balance  balance__icon--currencySoul balanceButtonsIsMobile"
+>
+  <div class="balance__icon balance__icon--soul"></div>
+  <div class="balance__data">
+    {{ authService.user?.souls ?? 0 | number }}
+  </div>
+  <div class="balance__plusIcon" routerLink="/soul-market"></div>
+</div>

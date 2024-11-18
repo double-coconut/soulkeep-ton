@@ -1,0 +1,37 @@
+<div class="popupDBuilder popup-container popup-container--darken">
+  <div class="cardInfoWrapper cardInfoWrapper--fitContent">
+    <div
+      class="card-info__content"
+      [style.background-image]="
+        '/assets/images/deckBuilder/cardInfoBg.png' | imageBlob : true
+      "
+    >
+      <div class="card-info__view">
+        <div class="rTitle">{{ inputData.title ?? '' }}</div>
+        <div class="rDescription">
+          {{ inputData.description ?? '' }}
+        </div>
+      </div>
+      <div class="cardInfoWrapper__btn flex">
+        <button
+          *ngIf="inputData.acceptText"
+          class="btn btn__default"
+          [class.margin-right]="inputData.acceptText"
+          (click)="close$.emit(true)"
+        >
+          <div class="btn__default__inner">
+            <span>{{inputData.acceptText}}</span>
+          </div>
+        </button>
+        <button
+          class="btn btn__default"
+          (click)="close$.emit()"
+        >
+          <div class="btn__default__inner">
+            <span>{{inputData.rejectText ?? 'OK'}}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

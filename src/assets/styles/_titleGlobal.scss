@@ -1,0 +1,146 @@
+@use 'variables' as *;
+
+.titleGlobal {
+  width: 100%;
+  height: clampF(44, 84);
+  background-image: url(~src/assets/images/league/headerBanner.png);
+  background-size: auto 100%;
+  background-repeat: repeat-x;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: static;
+
+  &__name {
+    font-style: normal;
+    font-weight: 700;
+    font-size: clampF(24, 56);
+    line-height: 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fbfafa;
+    text-shadow: 0 clampF(0, 4) 0 #240000;
+    letter-spacing: minF(1);
+  }
+
+  &:after {
+    content: '';
+    height: calc(64 / 84 * 100%);
+    aspect-ratio: 133/64;
+  }
+
+  &__soulshop {
+    margin-left: auto;
+
+    &--info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      gap: clampF(14, 28);
+    }
+
+    h3, h4, h6 {
+      margin: 0;
+      color: #FFF;
+      text-align: center;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 120%;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      font-size: clampF(32, 64);
+    }
+
+    h4 {
+      font-size: clampF(36, 108);
+    }
+
+    h6 {
+      font-size: clampF(20, 40);
+    }
+
+    .mb-4 {
+      margin-bottom: clampF(8, 16);
+    }
+  }
+}
+
+.soulshop:not(.soul-buy) {
+  .titleGlobal {
+    aspect-ratio: 8.8184713376;
+    height: unset;
+    background-image: url(~src/assets/images/soulshop/shop_banner_bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-bottom: 10px solid;
+    border-image: url(~src/assets/images/deckBuilder/separatorHoriz.png) 4 stretch;
+
+    .btn__back, &:after {
+      max-height: clampF(32, 64);
+      margin-bottom: auto;
+      margin-top: clampF(12, 24);
+    }
+  }
+}
+
+.soul-buy {
+  .titleGlobal {
+    aspect-ratio: 8.8184713376;
+    height: unset;
+    background-image: url(~src/assets/images/soulshop/soul-buy-banner-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-bottom: 10px solid;
+    border-image: url(~src/assets/images/deckBuilder/separatorHoriz.png) 4 stretch;
+
+    .btn__back, &:after {
+      max-height: clampF(32, 64);
+      margin-bottom: auto;
+      margin-top: clampF(12, 24);
+    }
+  }
+}
+
+.tickets {
+  .titleGlobal {
+    aspect-ratio: 8.8184713376;
+    height: unset;
+    background-image: url(~src/assets/images/soulshop/Baner.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-bottom: 10px solid;
+    border-image: url(~src/assets/images/deckBuilder/separatorHoriz.png) 4 stretch;
+
+    .btn__back, &:after {
+      max-height: clampF(32, 64);
+      margin-bottom: auto;
+      margin-top: clampF(12, 24);
+    }
+  }
+}
+
+.topButtonsContainer {
+  padding-bottom: 10px;
+  padding-top: 20px;
+
+  .btn__back {
+    margin-left: 73px;
+    width: 133px;
+    height: 64px;
+
+  }
+
+}
+
+.soulShopHeader{
+  display: flex;
+  gap: 48px;
+  .titleButtons{
+    gap: 16px;
+    display: flex;
+  }
+}

@@ -1,0 +1,24 @@
+@use 'variables' as *;
+
+.cardsNav {
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: minF(16);
+  gap: minF(16);
+  padding-left: minF(50);
+  &:after {
+    content: '';
+    position: absolute;
+    height: minF(8);
+    width: 100%;
+    background-image: url(~src/assets/images/deckBuilder/separatorHoriz.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    bottom: minF(-3);
+    z-index: 12;
+    left: 0;
+  }
+}

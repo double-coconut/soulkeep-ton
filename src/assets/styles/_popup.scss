@@ -1,0 +1,1015 @@
+@use 'variables' as *;
+@use 'wave';
+@use 'inGamePopup';
+@use 'popupBuilder';
+
+.popup-container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+
+  &--darken {
+    background: rgba(#000000, 0);
+    animation: popupBG 0.6s linear forwards;
+  }
+
+  > div.popupSettings__opacity {
+    opacity: 0;
+    animation: popupOpacity 0.25s linear forwards;
+  }
+}
+
+.popupSettings {
+  &__frame {
+    position: relative;
+    width: 592px;
+    aspect-ratio: 592/542;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    .titleFrame {
+      font-size: 48px;
+      width: 86%;
+      margin: 8% auto 9%;
+      @media screen and (max-width: $mediaSm) {
+        margin: 8% auto 4%;
+      }
+
+      svg {
+        top: -25%;
+      }
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+
+  &__content {
+    width: 80%;
+    height: 40%;
+    margin: auto auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: $mediaSm) {
+      height: 47%;
+    }
+  }
+
+  &__labelWrapper {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+    width: 77%;
+    margin-bottom: 38px;
+
+    .switch {
+      margin-left: auto;
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__labelText {
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 34px;
+    letter-spacing: 1px;
+    color: #fbfafa;
+    flex-basis: 50%;
+    text-align: left;
+    @media screen and (max-width: $mediaSm) {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+
+  &__soundWrapper {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    gap: 16px;
+    @media screen and (max-width: $mediaSm) {
+      gap: 7px;
+    }
+
+    .soundIcon {
+      display: block;
+      width: 100%;
+      max-width: 40px;
+      cursor: pointer;
+      @media screen and (max-width: $mediaSm) {
+        max-width: 20px;
+      }
+
+      .icon {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+      }
+    }
+
+    .soundSlider {
+      display: flex;
+      width: 67%;
+      height: 16px;
+      border-radius: 18px;
+      padding: 0;
+      position: relative;
+      @media screen and (max-width: $mediaSm) {
+        width: 65%;
+        height: 10px;
+      }
+
+      &-background {
+        display: flex;
+        width: 100%;
+        background-color: #170900;
+        height: 100%;
+        border-radius: 18px;
+      }
+
+      &__filled {
+        background-color: #02a8e9;
+        position: relative;
+        border-radius: inherit;
+
+        &:after {
+          content: '';
+          height: 320%;
+          max-height: 40px;
+          aspect-ratio: 1;
+          display: flex;
+          align-items: center;
+          background-image: url(../images/webPopup/inGamePopup/toggleLeft.png);
+          background-size: contain;
+          background-repeat: no-repeat;
+          cursor: pointer;
+          position: relative;
+          left: 100%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+
+  &__info {
+    margin-top: auto;
+    max-width: 60%;
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #0292cf;
+    @media screen and (max-width: $mediaSm) {
+      font-size: 12px;
+      line-height: 14px;
+      max-width: 70%;
+    }
+  }
+
+  &__closeButton {
+    width: 12.16%;
+    aspect-ratio: 1;
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 100%;
+    display: flex;
+    background-image: url(~src/assets/images/home/buttonCloseFrame.png);
+    @extend %CNRBGimage;
+
+    .closeButtonWrapper {
+      width: 78.375%;
+      aspect-ratio: 1;
+      display: flex;
+      flex: none;
+      margin: auto;
+      background-image: url(~src/assets/images/home/buttonClose.png);
+      background-color: transparent;
+      @extend %CNRBGimage;
+
+      .closeIcon {
+        width: 66%;
+        aspect-ratio: 1;
+        margin: auto;
+        flex: none;
+        background-image: url(~src/assets/images/home/iconClose.png);
+        @extend %CNRBGimage;
+        pointer-events: none;
+        transition: rotate 0.2s;
+      }
+    }
+  }
+}
+
+.popupLeagueChange {
+  &__frame {
+    position: relative;
+    width: 1470px;
+    aspect-ratio: 1470/854;
+    background-image: url(~src/assets/images/webPopup/leagueChange/bkg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    @media screen and (max-width: $mediaSm) {
+      width: 100%;
+      max-width: 800px;
+    }
+  }
+
+  &__title {
+    font-size: 64px;
+    width: 86%;
+    margin: 2% auto 8%;
+    color: #fcfcfd;
+    text-shadow: 0 2px 2px rgb(18 23 31 / 80%);
+    font-family: 'Caladea', sans-serif;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+
+    @media screen and (max-width: $mediaSm) {
+      margin: 2.5% auto 6%;
+      font-size: 35px;
+    }
+
+    @media screen and (max-width: 490px) {
+      margin: 2.5% auto 6%;
+      font-size: 24px;
+    }
+  }
+
+  &__content {
+    width: 80%;
+    height: 40%;
+    margin: auto auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: $mediaSm) {
+      height: 47%;
+    }
+  }
+
+  &__labelWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+
+    .switch {
+      margin-left: auto;
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__labelText {
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 30px;
+    line-height: 34px;
+    letter-spacing: 1px;
+    color: #fbfafa;
+    @media screen and (max-width: $mediaSm) {
+      font-size: 16px;
+      line-height: 18px;
+    }
+    text-align: left;
+  }
+
+  &__info {
+    margin-top: auto;
+    width: 100%;
+    max-width: 80%;
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #0292cf;
+
+    &__league {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      gap: 28px;
+      font-family: 'Caladea', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      text-transform: uppercase;
+      color: #ffffff;
+      flex: 1 0 0;
+      overflow: hidden;
+
+      &__rankIcon {
+        width: 100%;
+        max-width: 220px;
+      }
+
+      &__desc {
+        display: block;
+        text-align: center;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 1.25;
+        width: 100%;
+        max-width: 70%;
+      }
+    }
+
+    &__icon {
+      min-width: 20px;
+      max-width: 84px;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      flex-grow: 1;
+      flex-basis: 0;
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      font-size: 12px;
+      line-height: 14px;
+      max-width: 70%;
+
+      &__icon {
+        max-width: 40px;
+      }
+
+      &__league {
+        &__rankIcon {
+          max-width: 63.05418719212%;
+        }
+
+        &__desc {
+          font-size: 20px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 690px) {
+      max-width: 60%;
+    }
+
+    @media screen and (max-width: 590px) {
+      max-width: 50%;
+
+      &__icon {
+        max-width: 20px;
+      }
+
+      &__league {
+        gap: 16px;
+
+        &__rankIcon {
+          max-width: 63.05418719212%;
+        }
+
+        &__desc {
+          font-size: 14px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 490px) {
+      max-width: 40%;
+
+      &__league {
+        gap: 10px;
+
+        &__desc {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  &__closeButton {
+    width: 23.4013605442%;
+    aspect-ratio: 2.6563706564;
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    isolation: isolate;
+
+    &:after {
+      position: absolute;
+      content: '';
+      display: block;
+      inset: 0;
+      z-index: -1;
+      background-image: url(~src/assets/images/webPopup/leagueChange/btn_confirm.png);
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      filter: brightness(1) grayscale(0);
+      transition: all 0.2s;
+    }
+
+    &:hover {
+      &:after {
+        filter: brightness(0.8);
+      }
+    }
+
+    &__inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 3%;
+      top: 7%;
+      width: 94%;
+      aspect-ratio: 3.3;
+    }
+
+    span {
+      font-family: 'Caladea', sans-serif;
+      font-weight: 700;
+      font-size: 46px;
+      line-height: 1px;
+      display: block;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 0.8px 0 #03273c;
+
+      @media screen and (max-width: $mediaSm) {
+        font-size: 28px;
+      }
+
+      @media screen and (max-width: 690px) {
+        font-size: 20px;
+      }
+
+      @media screen and (max-width: 540px) {
+        font-size: 16px;
+      }
+
+      @media screen and (max-width: 490px) {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.popupFinalBeta {
+  &__frame {
+    position: relative;
+    width: 1470px;
+    aspect-ratio: 1470/854;
+    background-image: url(~src/assets/images/webPopup/leagueChange/bkg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    @media screen and (max-width: $mediaSm) {
+      width: 100%;
+      max-width: 800px;
+    }
+  }
+
+  &__title {
+    font-size: 64px;
+    width: 86%;
+    margin: 2% auto 8%;
+    color: #fcfcfd;
+    text-shadow: 0 2px 2px rgb(18 23 31 / 80%);
+    font-family: 'Caladea', sans-serif;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 700;
+    text-align: center;
+
+    @media screen and (max-width: $mediaSm) {
+      margin: 2.5% auto 6%;
+      font-size: 35px;
+    }
+
+    @media screen and (max-width: 490px) {
+      margin: 2.5% auto 6%;
+      font-size: 24px;
+    }
+  }
+
+  &__content {
+    width: 80%;
+    height: 40%;
+    margin: auto auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media screen and (max-width: $mediaSm) {
+      height: 47%;
+    }
+  }
+
+  &__labelWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 15px;
+
+    @media screen and (max-width: $mediaSm) {
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+  }
+
+  &__labelText {
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 42px;
+    letter-spacing: 1px;
+    color: #fbfafa;
+    text-align: center;
+    line-height: 48px;
+    margin: 2%;
+
+    &__survey {
+      letter-spacing: 1px;
+      text-decoration-line: underline;
+      text-transform: uppercase;
+      color: #18f6f9;
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      font-size: 20px;
+      line-height: 22px;
+    }
+  }
+
+  &__info {
+    &__league {
+      &__rankIcon {
+        width: 100%;
+        max-width: 178px;
+      }
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      font-size: 12px;
+      line-height: 14px;
+      max-width: 70%;
+
+      &__icon {
+        max-width: 40px;
+      }
+
+      &__league {
+        &__rankIcon {
+          max-width: 20%;
+        }
+
+        &__desc {
+          font-size: 20px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 690px) {
+      max-width: 60%;
+    }
+
+    @media screen and (max-width: 590px) {
+      max-width: 50%;
+
+      &__icon {
+        max-width: 20px;
+      }
+
+      &__league {
+        gap: 16px;
+
+        &__rankIcon {
+          max-width: 15%;
+        }
+
+        &__desc {
+          font-size: 14px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 490px) {
+      max-width: 40%;
+
+      &__league {
+        gap: 10px;
+
+        &__desc {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  &__closeButton {
+    width: 23.4013605442%;
+    aspect-ratio: 2.6563706564;
+    position: absolute;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    isolation: isolate;
+
+    &:after {
+      position: absolute;
+      content: '';
+      display: block;
+      inset: 0;
+      z-index: -1;
+      background-image: url(~src/assets/images/webPopup/leagueChange/btn_confirm.png);
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+      filter: brightness(1) grayscale(0);
+      transition: all 0.2s;
+    }
+
+    &:hover {
+      &:after {
+        filter: brightness(0.8);
+      }
+    }
+
+    &__inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      left: 3%;
+      top: 7%;
+      width: 94%;
+      aspect-ratio: 3.3;
+    }
+
+    span {
+      font-family: 'Caladea', sans-serif;
+      font-weight: 700;
+      font-size: 46px;
+      line-height: 1px;
+      display: block;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 0.8px 0 #03273c;
+
+      @media screen and (max-width: $mediaSm) {
+        font-size: 28px;
+      }
+
+      @media screen and (max-width: 690px) {
+        font-size: 20px;
+      }
+
+      @media screen and (max-width: 540px) {
+        font-size: 16px;
+      }
+
+      @media screen and (max-width: 490px) {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.popupFTUE {
+  &__block {
+    width: 100%;
+    max-width: 752px;
+    min-height: 300px;
+    position: relative;
+    padding: 42px 126px 88px 280px;
+    background-repeat: no-repeat;
+    background-size: 90% 97%;
+    background-position: center;
+    z-index: 3;
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 32px;
+    display: flex;
+
+    &__center {
+      padding: 21px 63px 44px 63px;
+      justify-content: center;
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      padding: 21px 63px 44px 140px;
+      max-width: 480px;
+      min-height: 150px;
+
+      width: calc(100% - 20px);
+      font-size: 14px;
+      line-height: 16px;
+      background-size: 91% 97%;
+
+      &__center {
+        padding: 21px 63px 44px 63px;
+        justify-content: center;
+      }
+
+      .buyText {
+        font-size: 16px !important;
+      }
+    }
+  }
+
+  &__logo {
+    z-index: 99;
+    position: absolute;
+    width: 280px;
+    aspect-ratio: 280/326;
+    top: -80px;
+    left: -15px;
+    //background-image: url(~src/assets/images/FTUE/rankIcons.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    @media screen and (max-width: $mediaSm) {
+      width: 140px;
+      top: -40px;
+      left: -8px;
+    }
+  }
+
+  &__image {
+    z-index: 99;
+    position: absolute;
+    width: 160px;
+    aspect-ratio: 1;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 80px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    @media screen and (max-width: $mediaSm) {
+      left: 40px;
+      width: 80px;
+    }
+  }
+
+  &.popupBuyPacks {
+    .popupFTUE__image {
+    }
+
+    .popupFTUE__block {
+      display: flex;
+      align-items: center;
+    }
+
+    .buyText {
+      font-weight: 700;
+      color: #042735;
+      font-size: 25px;
+    }
+  }
+
+  &__pictureFrame {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    border-image-slice: calc(170 / 752 * 100%) calc(70 / 370 * 100%) fill !important;
+    border-image-width: 70px 170px !important;
+    @media screen and (max-width: $mediaSm) {
+      border-image-width: 35px 85px !important;
+    }
+  }
+
+  &__content {
+    /*display: flex;
+    flex: 1;
+    align-items: center;*/
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .type {
+    font-family: 'Red Hat Mono', monospace;
+    font-weight: 500;
+    color: #0000;
+    background: linear-gradient(-90deg, #0b0c0c 2px, #0000 0) 10px 0,
+    linear-gradient(rgba(0, 0, 0, 0.69) 0 0) 0 0;
+    background-size: 0 200%;
+    -webkit-background-clip: padding-box, text;
+    background-clip: padding-box, text;
+    background-repeat: no-repeat;
+    animation: cursor 1s 0.7s infinite steps(1),
+    textStep calc(var(--n) * 0.015s) 0.7s steps(var(--n)) forwards,
+    visibility 0.7s forwards;
+  }
+
+  .introPopup {
+    width: fit-content;
+    height: fit-content;
+
+    &__title {
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+  }
+
+  .btn__FTUE__intro {
+    bottom: -6%;
+  }
+
+  .example {
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 10px;
+    padding: 40px;
+    background: #005f6b;
+    color: #00dffc;
+  }
+
+  @keyframes textStep {
+    from {
+      background-size: 0 200%;
+    }
+    to {
+      background-size: calc(var(--n) * 1ch) 200%;
+    }
+  }
+  @keyframes cursor {
+    50% {
+      background-position: 0 -100%, 0 0;
+    }
+  }
+  @keyframes visibility {
+    0%,
+    99% {
+      visibility: hidden;
+    }
+    100% {
+      visibility: visible;
+    }
+  }
+
+  .replay-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+}
+
+.game-content__rewards__section {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: 79%;
+  height: clampF(25, 60);
+  background-image: url("/assets/images/tournaments/reward-section.png");
+  width: clampF(160, 320);
+  text-align: center;
+  color: #FFFFFF;
+  background-size: 100% 105%;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 clampF(5, 10);
+
+  .reward-holder {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .reward__icon-anim {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform: translate3d(0, 0, 0);
+
+      &.animate {
+        transform: translate3d(0, var(--stopPos), 0);
+        transition: transform var(--stopDuration) ease-in-out;
+      }
+
+      .league__reward__icon-item {
+        height: clampF(20, 48);
+        width: clampF(20, 48);
+        background-repeat: no-repeat;
+        background-size: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    font-size: clampF(12, 24);
+    font-weight: 700;
+    line-height: clampF(16, 32);
+    letter-spacing: 2px;
+    text-align: center;
+    color: white;
+    height: 100%;
+  }
+
+  &__icon {
+    height: 100%;
+    padding: clampF(2, 5);
+  }
+}
+
+
+.game-defeated {
+  .imageWrapper {
+    top: 32%;
+  }
+
+  .game-content__cards {
+    top: 61%;
+  }
+}
+
+.defeated-wrapper, .victory-wrapper {
+  .game-content__rewards__section {
+    top: 78%;
+  }
+
+  .media-wrapper__title--two {
+    top: 73%;
+  }
+
+  .game-for-tournament {
+    top: 60%;
+  }
+
+  .media-wrapper__title {
+    top: 56%;
+  }
+  .score-wrapper {
+    top: 47%;
+  }
+}
+
+.wave-wrapper {
+  .score-wrapper {
+    top: 50%;
+  }
+
+  .game-content__cards {
+    top: 67%;
+  }
+
+  .media-wrapper__title {
+    top: 61%;
+  }
+}

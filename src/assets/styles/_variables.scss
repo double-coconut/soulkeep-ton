@@ -1,0 +1,520 @@
+@use 'sass:math';
+
+$mediaXs: 900px;
+$mediaSm: 1444px;
+$mediaT: 700px;
+$mediaH: 550px;
+
+$dw: math.div(100vw, 1920);
+$dwM: math.div(100vw, 667);
+$dhM: math.div(100dvh, 1080);
+$varX: math.div(100, 667);
+$varY: math.div(100, 375);
+$varLx: math.div(100vw, 596);
+$varLy: math.div(100dvh, 900);
+//fonts
+
+@function minF($value) {
+  @if ($value > 0) {
+    @return min($value * $dw, $value * $dhM);
+  } @else {
+    @return max($value * $dw, $value * $dhM);
+  }
+}
+
+@function clampF($minV, $maxV) {
+  @if ($minV > 0) {
+    @return clamp($minV * 1px, minF($maxV), $maxV * 1px);
+  } @else {
+    @return clamp($minV * 1px, minF($minV), $maxV * 1px);
+  }
+}
+
+$icomoon-font-family: 'tdIcon' !default;
+$icomoon-font-path: '/assets/styles/fonts' !default;
+
+$tdIcon-attack-range: '\e90c';
+$tdIcon-attack-rate: '\e904';
+$tdIcon-battle-uses: '\e905';
+$tdIcon-damage-blast: '\e906';
+$tdIcon-damage-duration: '\e907';
+$tdIcon-damage-sword: '\e909';
+$tdIcon-damage-type: '\e908';
+$tdIcon-double-damage: '\e90a';
+$tdIcon-dps: '\e900';
+$tdIcon-duration: '\e90b';
+$tdIcon-hearts: '\e901';
+$tdIcon-higher-chance-of-critical-hit: '\e90d';
+$tdIcon-immobilize: '\e90e';
+$tdIcon-increase-attack-by: '\e90f';
+$tdIcon-increase-chance-of-fiend-souls: '\e910';
+$tdIcon-increase-speed-by: '\e911';
+$tdIcon-make-fiends: '\e912';
+$tdIcon-mana-regeneration-rate: '\e913';
+$tdIcon-more-refund-when-selling-tower: '\e914';
+$tdIcon-number-of-fiends-hit: '\e915';
+$tdIcon-number-of-fiends-to-convert-to-bring-to-your-team: '\e916';
+$tdIcon-poison: '\e918';
+$tdIcon-poison-duration: '\e917';
+$tdIcon-reduce-cost-of-mana: '\e919';
+$tdIcon-reduce-health: '\e91a';
+$tdIcon-reduce-magic-resistance-by: '\e91b';
+$tdIcon-seconds: '\e902';
+$tdIcon-slowdown: '\e91d';
+$tdIcon-slowdown-duration: '\e91c';
+$tdIcon-target-fiends: '\e920';
+$tdIcon-towers: '\e903';
+$tdIcon-uses: '\e91e';
+$tdIcon-variant: '\e91f';
+
+// fonts End
+
+:root {
+  --app-height: 100dvh;
+}
+
+%scrollBar {
+  &::-webkit-scrollbar {
+    width: 12 * $dw;
+    height: 0 * $dw;
+  }
+
+  &::-webkit-scrollbar-button {
+    width: 10 * $dw;
+    height: 0 * $dw;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #1d5b71;
+    border: 4 * $dw solid transparent;
+    background-clip: content-box;
+    border-radius: 55px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #000018;
+    border: 2 * $dw solid #1d5b71;
+    border-radius: 50px;
+  }
+
+  &::-webkit-scrollbar-track:hover {
+    background: #000018;
+  }
+
+  &::-webkit-scrollbar-track:active {
+    background: #000018;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+%CNRBGimage {
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+%cardBlockItem {
+  width: 100%;
+  max-width: 276px;
+  display: flex;
+  margin-top: 18px;
+  user-select: none;
+}
+
+%smoothScroll {
+  overflow-y: auto;
+
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+
+  &::-webkit-scrollbar-button {
+    width: 10px;
+    height: 20px;
+  }
+}
+
+%smoothScrollMini {
+  overflow-y: auto;
+
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 3%,
+    #000 97%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 3%,
+    #000 97%,
+    transparent 100%
+  );
+
+  &::-webkit-scrollbar-button {
+    width: 10px;
+    height: 20px;
+  }
+}
+
+%highlightButtonBefore {
+  content: '';
+  position: absolute;
+  aspect-ratio: 309/598;
+  width: 97px;
+  bottom: 50px;
+  left: 120px;
+  //background-image: url(~src/assets/images/FTUE/handFTUE.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform: scale(-1, -1) rotate(75deg);
+  z-index: 100000;
+  animation: handAnimation 1.5s linear infinite;
+  @media screen and (hover: none) {
+    transform: scale(1, -1) rotate(75deg);
+    animation: handAnimationMobile 1.5s linear infinite;
+    left: unset;
+    right: 120px;
+    bottom: 30px;
+  }
+}
+
+.tooltipIcon {
+  aspect-ratio: 1;
+  background-image: url(~src/assets/images/home/infoTooltip.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: help;
+  position: relative;
+  z-index: 999999;
+}
+
+.spsBlock__titleWrapper .tooltip-content {
+  bottom: unset;
+  top: 10%;
+  right: 100%;
+  mask-image: url(~src/assets/images/home/shape1.svg);
+  transform-origin: top right;
+}
+
+.tooltip-content {
+  position: absolute;
+  background-image: url(~src/assets/images/deckBuilder/wave-info.png);
+  mask-image: url(~src/assets/images/home/shape.svg);
+  background-size: 100% 100%;
+  mask-size: 100% 100%;
+  z-index: 9999;
+  width: clampF(120, 300);
+  bottom: 100%;
+  right: 0;
+  padding: clampF(10, 50) clampF(8, 30);
+  text-align: center;
+  color: black;
+  opacity: 0;
+  cursor: default;
+  font-size: clampF(12, 24);
+  line-height: 1.2;
+  pointer-events: none;
+  transform: scale3d(0.1, 0.2, 1);
+  transform-origin: bottom right;
+  transition: opacity 0.2s, transform 0.2s;
+  transition-timing-function: ease, cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+.tooltipIcon:hover .tooltip-content {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale3d(1, 1, 1);
+  text-transform: initial;
+  font-weight: normal;
+  letter-spacing: initial;
+}
+
+/* Arrow */
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: scale(-1, 1) rotate(0);
+  }
+
+  100% {
+    transform: scale(-1, 1) rotate(-360deg);
+  }
+}
+
+@keyframes rotateO {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateZ {
+  0% {
+    transform: translate(-50%, -50%) rotateZ(0);
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotateZ(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes swing {
+  20% {
+    transform: rotateX(9deg);
+  }
+  40% {
+    transform: rotateX(-9deg);
+  }
+  60% {
+    transform: rotateX(3deg);
+  }
+  80% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes filter {
+  0% {
+    filter: drop-shadow(0px 0px 10px #fff) drop-shadow(0px 0px 20px #2d55ff)
+      drop-shadow(0px 0px 40px #2d55ff);
+  }
+
+  50% {
+    filter: drop-shadow(0px 0px 30px #fff) drop-shadow(0px 0px 60px #2d55ff)
+      drop-shadow(0px 0px 90px #2d55ff);
+  }
+  100% {
+    filter: drop-shadow(0px 0px 10px #fff) drop-shadow(0px 0px 20px #2d55ff)
+      drop-shadow(0px 0px 40px #2d55ff);
+  }
+}
+
+@keyframes swingOut {
+  20% {
+    transform: rotateX(9deg);
+  }
+  40% {
+    transform: rotateX(-9deg);
+  }
+  60% {
+    transform: rotateX(3deg);
+  }
+  80% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@keyframes fadeIn{
+  0%,50% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+@keyframes contentAnimation {
+  0% {
+    content: 'Loading';
+  }
+  25% {
+    content: 'Loading.';
+  }
+  50% {
+    content: 'Loading..';
+  }
+  75% {
+    content: 'Loading...';
+  }
+  100% {
+    content: 'Loading';
+  }
+}
+
+@keyframes boxShadow {
+  0% {
+    box-shadow: 25px 20px 0px -8px white, 285px 8px 0px -8px white,
+      15px 57px 0px -8px white, 266px 55px 0px -8px white,
+      54px 46px 0px -8px white, 180px 10px 0px -8px white,
+      147px 56px 0px -8px white;
+  }
+
+  25% {
+    box-shadow: 25px 20px 10px 8px white, 285px 8px 10px 8px white,
+      15px 57px 0px -8px white, 266px 55px 10px 8px #dccec0,
+      54px 46px 0px -8px white, 180px 10px 0px -8px white,
+      147px 56px 0px -8px white;
+  }
+
+  50% {
+    box-shadow: 25px 20px 10px 8px #bbabab, 285px 8px 0px -8px white,
+      15px 57px 10px 8px white, 266px 55px 10px 8px white,
+      54px 46px 0px -8px white, 180px 10px 10px 8px white,
+      147px 56px 0px -8px white;
+  }
+
+  75% {
+    box-shadow: 25px 20px 10px 8px white, 285px 8px 0px -8px white,
+      15px 57px 0px -8px white, 266px 55px 0px -8px white,
+      54px 46px 10px 8px white, 180px 10px 10px 8px #dcc5ab,
+      147px 56px 10px 8px white;
+  }
+
+  100% {
+    box-shadow: 25px 20px 0px -8px white, 285px 8px 0px -8px white,
+      10px 57px 0px -8px white, 266px 55px 0px -8px white,
+      54px 46px 0px -8px white, 180px 10px 0px -8px white,
+      147px 56px 0px -8px white;
+  }
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+    pointer-events: none;
+  }
+  30% {
+    opacity: 0;
+    transform: scale(0.7);
+    pointer-events: none;
+  }
+  80% {
+    transform: scale(1.15);
+    pointer-events: none;
+  }
+  99.99% {
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+  }
+}
+
+@keyframes popupOpacity {
+  0% {
+    opacity: 0;
+    pointer-events: none;
+  }
+  100% {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+@keyframes popupBG {
+  0% {
+    background: rgba(#000000, 0);
+  }
+
+  100% {
+    background: rgba(#000000, 0.7);
+  }
+}
+
+@keyframes opacityCardBlock {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes handAnimation {
+  0%,
+  100% {
+    transform: scale(-1, -1) rotate(75deg);
+  }
+  50% {
+    transform: translateX(20%) translateY(-10%) scale(-1, -1) rotate(80deg);
+  }
+}
+
+@keyframes handAnimationMobile {
+  0%,
+  100% {
+    transform: scale(1, -1) rotate(75deg);
+  }
+  50% {
+    transform: translateX(-20%) translateY(-10%) scale(1, -1) rotate(80deg);
+  }
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(0) scaleX(0.85) rotate(45deg);
+    animation-timing-function: ease-out;
+    border-radius: 100%;
+  }
+  60% {
+    transform: translateY(200%) scaleX(0.85) rotate(45deg);
+    animation-timing-function: ease-in;
+    border-radius: 0 100% 100% 100%;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(clampF(16, 250)) scaleX(0.85) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+@keyframes longTextAnimation {
+  0%,
+  5%,
+  95%,
+  100% {
+    left: 10px;
+    transform: translateX(0);
+  }
+  45%,
+  55% {
+    left: calc(100% - 10px);
+    transform: translateX(-100%);
+  }
+}

@@ -1,0 +1,1563 @@
+@use 'variables' as *;
+
+%innerBefore {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-size: contain;
+  z-index: -1;
+  filter: brightness(1) grayscale(0);
+  transition: all 0.2s;
+}
+
+.btn {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  user-select: none;
+  font-family: 'Caladea', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: none;
+  background-color: transparent;
+
+  &[disabled],
+  &:disabled {
+    filter: grayscale(1);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &.disabled {
+    filter: grayscale(1);
+  }
+
+  @media (hover) {
+    &:not(.disabled):not([disabled]):not(:disabled) {
+      cursor: pointer;
+    }
+  }
+
+  &__hint {
+    --hintWidth: 88px;
+    width: var(--hintWidth);
+    aspect-ratio: 11/10;
+    background: url(../images/btn/btnHint.png) no-repeat center/ contain;
+    position: relative;
+    flex: none;
+    transition: all 0.2s;
+    transform: translateX(-2px);
+
+    @media screen and (max-width: #{$mediaT}), (max-height: #{$mediaT}) {
+      --hintWidth: 42px;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 18%;
+      width: calc(54 / 88 * 100%);
+      aspect-ratio: 1;
+      background-size: contain;
+      filter: grayscale(0.4);
+      transition: all 0.2s;
+    }
+
+    &:active {
+      transform: translateX(0);
+
+      &:after {
+        filter: grayscale(0);
+      }
+    }
+
+    @media (hover) {
+      &:hover {
+        transform: translateX(0);
+
+        &:after {
+          filter: grayscale(0);
+        }
+      }
+    }
+
+    &-battleLog {
+      &:after {
+        background-image: url(../images/btn/btnHintBattleLog.png);
+      }
+    }
+
+    &-FAQ {
+      &:after {
+        background-image: url(../images/btn/btnHint-FAQ.png);
+      }
+    }
+  }
+
+  &__secondary {
+    &-small {
+      --btnSecondaryPanelBG: url(../images/btn/btnSecondaryPanelSmall.png);
+      --btnSecondaryWidth: 282;
+      --btnSecondaryHeight: 152;
+
+      @media screen and (max-width: #{$mediaSm}) {
+        --btnSecondaryWidth: 100;
+        --btnSecondaryHeight: 50;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        --btnSecondaryWidth: 183;
+        --btnSecondaryHeight: 96;
+      }
+    }
+
+    &-rewards {
+      --btnSecondaryPanelBG: url(../images/btn/Rewards.png);
+      --btnSecondaryWidth: 276;
+      --btnSecondaryHeight: 100;
+
+      @media screen and (max-width: #{$mediaSm}) {
+        --btnSecondaryWidth: 88;
+        --btnSecondaryHeight: 32;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        --btnSecondaryWidth: 183;
+        --btnSecondaryHeight: 96;
+      }
+
+      justify-content: flex-end;
+      transform: translateX(-8px);
+
+      span {
+        margin-top: -2%;
+      }
+
+      .btn__secondary__imageBlock {
+        right: -17%;
+        height: 135%;
+
+        &:after {
+          height: calc(114 / 176 * 100%);
+          aspect-ratio: 123/114;
+          background-image: url(../images/btn/rewardIcon.png);
+        }
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        height: 100%;
+        aspect-ratio: 0.9;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        .btn__secondary__imageBlock {
+          height: 110%;
+        }
+
+        &:after {
+          aspect-ratio: 0.75;
+        }
+      }
+    }
+
+    &-leagues {
+      --btnSecondaryPanelBG: url(../images/btn/leagues.png);
+      --btnSecondaryWidth: 276;
+      --btnSecondaryHeight: 100;
+
+      @media screen and (max-width: #{$mediaSm}) {
+        --btnSecondaryWidth: 88;
+        --btnSecondaryHeight: 32;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        --btnSecondaryWidth: 183;
+        --btnSecondaryHeight: 96;
+      }
+
+      justify-content: flex-start;
+      transform: translateX(8px);
+
+      span {
+        margin-top: -2%;
+      }
+
+      .btn__secondary__imageBlock {
+        left: -17%;
+        height: 135%;
+        background-image: none;
+        aspect-ratio: 130/144;
+
+        &:after {
+          height: 96%;
+          top: 46%;
+          aspect-ratio: 113/139;
+          background-image: none;
+        }
+
+        .avatar__wrapper {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -58%);
+          width: 140%;
+        }
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        height: 100%;
+        aspect-ratio: 0.9;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        .btn__secondary__imageBlock {
+          height: 110%;
+        }
+
+        &:before {
+          aspect-ratio: 0.75;
+        }
+      }
+    }
+
+    &-big {
+      --btnSecondaryPanelBG: url(../images/btn/btnSecondaryPanelBig.png);
+      --btnSecondaryWidth: 374;
+      --btnSecondaryHeight: 154;
+
+      @media screen and (max-width: #{$mediaSm}) {
+        --btnSecondaryWidth: 110;
+        --btnSecondaryHeight: 50;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        --btnSecondaryWidth: 204;
+        --btnSecondaryHeight: 96;
+      }
+    }
+
+    &-left {
+      justify-content: flex-end;
+      transform: translateX(-8px);
+
+      .btn__secondary__imageBlock {
+        right: -115px;
+
+        @media screen and (max-width: #{$mediaSm}) {
+          right: -38px;
+        }
+
+        @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+          right: -57px;
+        }
+      }
+    }
+
+    &-right {
+      justify-content: flex-start;
+      transform: translateX(8px);
+
+      .btn__secondary__imageBlock {
+        left: -115px;
+
+        @media screen and (max-width: #{$mediaSm}) {
+          left: -38px;
+        }
+
+        @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+          left: -57px;
+        }
+      }
+    }
+
+    &-market {
+      .btn__secondary__imageBlock:after {
+        height: calc(114 / 176 * 100%);
+        aspect-ratio: 124/114;
+        background-image: url(../images/btn/btnMarketIcon.png);
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        height: 100%;
+        aspect-ratio: 0.4;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        .btn__secondary__imageBlock {
+          height: 110%;
+        }
+
+        &:after {
+          aspect-ratio: 0.5;
+        }
+      }
+    }
+
+    &-souls {
+      .btn__secondary__imageBlock:after {
+        height: calc(114 / 176 * 100%);
+        aspect-ratio: 124/114;
+        background-image: url(../images/btn/btnFiendSoulsIcon.png);
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        height: 100%;
+        aspect-ratio: 0.4;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        .btn__secondary__imageBlock {
+          height: 110%;
+        }
+
+        &:after {
+          aspect-ratio: 0.5;
+        }
+      }
+    }
+
+    &-openPacks {
+      .btn__secondary__imageBlock:after {
+        height: calc(100 / 176 * 100%);
+        aspect-ratio: 96/100;
+        background-image: url(../images/btn/btnOpenPacksIcon.png);
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        height: 100%;
+        aspect-ratio: 0.4;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        .btn__secondary__imageBlock {
+          height: 110%;
+        }
+
+        &:before {
+          aspect-ratio: 0.5;
+        }
+      }
+    }
+
+    &-defenses {
+      .btn__secondary__imageBlock:after {
+        height: calc(106 / 176 * 100%);
+        aspect-ratio: 116/106;
+        background-image: url(../images/btn/btnMyDefensesIcon.png);
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        height: 100%;
+        aspect-ratio: 0.4;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        .btn__secondary__imageBlock {
+          height: 110%;
+        }
+
+        &:before {
+          aspect-ratio: 0.5;
+        }
+      }
+    }
+
+    position: relative;
+    width: calc(var(--btnSecondaryWidth) * 1px);
+    height: calc(var(--btnSecondaryHeight) * 1px);
+    background-image: var(--btnSecondaryPanelBG);
+    @extend %CNRBGimage;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: right;
+    text-transform: uppercase;
+    color: #fa9913;
+    text-shadow: 0 minF(4) 0 #061319;
+
+    background-color: transparent;
+    transition: all 0.2s;
+    will-change: transform;
+
+    @media screen and (max-width: #{$mediaSm}) {
+      font-size: 10px;
+    }
+
+    @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+      font-size: 18px;
+    }
+
+    span {
+      transition: all 0.2s;
+    }
+
+    &__imageBlock {
+      position: absolute;
+      height: 118.75%;
+      aspect-ratio: 158/176;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url(../images/btn/circle.png);
+      background-size: contain;
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        filter: grayscale(0.4);
+        @extend %CNRBGimage;
+        transition: all 0.2s;
+      }
+    }
+
+    @media (hover) {
+      &:not(.disabled):not([disabled]):not(:disabled):hover {
+        transform: translateX(0);
+
+        .btn__secondary__imageBlock:after {
+          filter: grayscale(0);
+          transform: translate(-50%, -50%) scale(1);
+        }
+      }
+    }
+
+    &:not(.disabled):not([disabled]):not(:disabled):active {
+      transform: translateX(0);
+      will-change: transform;
+    }
+  }
+
+  &__battle {
+    height: 100%;
+    aspect-ratio: 354/150;
+    position: relative;
+    background-color: transparent;
+    background-image: url(../images/home/battleFrame.png);
+    @extend %CNRBGimage;
+    transform-origin: center -30px;
+    pointer-events: fill;
+    will-change: transform;
+
+    @media (hover) {
+      &:not(.disabled):not([disabled]):not(:disabled) {
+        &:hover {
+          .btn__battle__inner:after {
+            filter: brightness(0.8);
+          }
+        }
+      }
+    }
+
+    &:not(.disabled):not([disabled]):not(:disabled):active {
+      .btn__battle__inner:after {
+        filter: brightness(0.5);
+      }
+    }
+
+    @media screen and (max-width: #{$mediaSm}) {
+      --btnBattleWidth: 220px;
+    }
+
+    @media screen and (max-width: #{$mediaSm}) and (orientation: landscape) {
+      --btnBattleWidth: 160px;
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: -21%;
+      @extend %CNRBGimage;
+      aspect-ratio: 72/208;
+      width: calc(18 / 354 * 100%);
+      pointer-events: none;
+    }
+
+    &:before {
+      left: 13%;
+      background-image: url(../images/btn/chainLeft.png);
+    }
+
+    &:after {
+      right: 13%;
+      background-image: url(../images/btn/chainRight.png);
+    }
+
+    &[disabled],
+    &.disabled,
+    &:disabled {
+      .btn__battle__inner:after {
+        filter: brightness(1) grayscale(0.8);
+      }
+    }
+
+    &__inner {
+      position: absolute;
+      aspect-ratio: 308/76;
+      width: calc(308 / 354 * 100%);
+      right: 6.5%;
+      top: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 48px;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 2px 0 #004227;
+      background-size: contain;
+      background-color: transparent;
+      transition: all 0.2s;
+      will-change: transform;
+      pointer-events: none;
+
+      @media screen and (max-width: #{$mediaSm}) {
+        font-size: 24px;
+      }
+
+      @media screen and (max-height: #{$mediaT}) {
+        font-size: 24px;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (orientation: landscape) {
+        font-size: 18px;
+      }
+
+      span {
+        position: relative;
+        z-index: 9;
+        margin-top: -3%;
+      }
+
+      &:after {
+        @extend %innerBefore;
+        background-image: url(../images/btn/battleButtonDefault.png);
+      }
+    }
+  }
+
+  &__stateOne {
+    --btnPaksBuyWidth: 312px;
+    aspect-ratio: 312/88;
+    position: relative;
+    width: var(--btnPaksBuyWidth);
+    background-color: transparent;
+    background-image: url(../images/btn/packsButtonBase.png);
+    transform: translate3d(0, 0, 0);
+
+    &:disabled,
+    &[disabled],
+    &:disabled {
+      filter: none;
+
+      .btn__stateOne__inner:after {
+        filter: brightness(1) grayscale(0.8);
+      }
+
+      .btn__stateOne__inner:before {
+        opacity: 1;
+        animation: contentAnimation 1s infinite;
+      }
+
+      span {
+        opacity: 0;
+      }
+    }
+
+    &:not(.disabled):not([disabled]):not(:disabled):active {
+      .btn__stateOne__inner:after {
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+    }
+
+    @media screen and (max-width: #{$mediaSm}) {
+      --btnPaksBuyWidth: 118px;
+    }
+    @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+      --btnPaksBuyWidth: 177px;
+    }
+
+    @media (hover) {
+      &:not(.disabled):not([disabled]):not(:disabled):hover {
+        .btn__stateOne__inner:after {
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+
+    &.disabledState {
+      transition: all 1s !important;
+    }
+
+    @extend %CNRBGimage;
+
+    &--img::before {
+      content: '';
+      position: absolute;
+      left: -30%;
+      top: 50%;
+      width: calc(136 / 322 * 100%);
+      aspect-ratio: 1;
+      background-image: url(../images/home/tournaments.png);
+      @extend %CNRBGimage;
+      z-index: 99;
+      transform: translateY(-50%) rotateY(2deg) scale(1.02);
+      transition: all 0.2s;
+    }
+
+    &--center {
+      .btn__stateOne__inner {
+        align-items: center;
+        justify-content: center;
+
+        span {
+          margin: auto;
+        }
+      }
+    }
+
+    &__inner {
+      position: absolute;
+      aspect-ratio: 1240/296;
+      width: calc(310 / 324 * 100%);
+      right: 1.8%;
+      top: 6%;
+      display: flex;
+      align-items: center;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 32px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 1.5px 0 #55000f;
+      background-size: contain;
+      background-color: transparent;
+      transition: all 0.2s;
+      overflow: hidden;
+
+      @media screen and (max-width: #{$mediaSm}) {
+        font-size: 12px;
+        text-shadow: 0 1.5px 0 #55000f;
+      }
+
+      @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+        font-size: 18px;
+        text-shadow: 0 2px 0 #55000f;
+      }
+
+      span {
+        position: relative;
+        z-index: 9;
+        margin-left: 34%;
+        margin-top: -3%;
+        transition: opacity 0.2s 0.5s ease-out;
+      }
+
+      &:after {
+        @extend %innerBefore;
+        background-image: url(../images/btn/packsButtonDefault.png);
+        background-blend-mode: color;
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      &:before {
+        content: 'Loading';
+        position: absolute;
+        left: 28%;
+        z-index: 99;
+        opacity: 0;
+        transition: opacity 0.2s linear;
+      }
+    }
+
+    &__tournaments .btn__stateOne__inner {
+      justify-content: center;
+
+      span {
+        margin-left: 0;
+      }
+
+      &:after {
+        @extend %innerBefore;
+        background-image: url(../images/btn/tournamentsButtonDefault.png);
+      }
+    }
+  }
+
+  &__levelUp {
+    aspect-ratio: 280/80;
+    position: relative;
+    width: clampF(114, 280);
+    background-color: transparent;
+    background-image: url(../images/btn/btnLevelUpWrapper.png);
+    transform: translate3d(0, 0, 0);
+
+    &:disabled,
+    &[disabled],
+    &:disabled {
+      filter: none;
+
+      .btn__levelUp__inner:after {
+        filter: brightness(1) grayscale(0.8);
+      }
+
+      .btn__levelUp__inner:before {
+        opacity: 1;
+      }
+    }
+
+    @media (hover) {
+      &:not(.disabled):not([disabled]):not(:disabled):hover {
+        .btn__levelUp__inner:after {
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+
+    @extend %CNRBGimage;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: -9.5%;
+      top: 43%;
+      width: calc(35 / 114 * 100%);
+      aspect-ratio: 84/96;
+      background-image: url(../images/btn/levelup_icon.png);
+      @extend %CNRBGimage;
+      z-index: 99;
+      transform: translateY(-50%);
+    }
+
+    &__inner {
+      position: absolute;
+      aspect-ratio: 270/64;
+      width: calc(270 / 280 * 100%);
+      right: 1.8%;
+      top: 6%;
+      display: flex;
+      align-items: center;
+      font-family: 'Caladea', sans-serif;
+      font-weight: 700;
+      font-size: clampF(12, 32);
+      line-height: 1;
+      letter-spacing: clampF(1, 2);
+      text-transform: uppercase;
+      color: #fbfafa;
+      text-shadow: 0 clampF(1, 2) 0 #00080d;
+      background-size: contain;
+      background-color: transparent;
+      transition: all 0.2s;
+      overflow: hidden;
+
+      span {
+        position: relative;
+        z-index: 9;
+        margin-left: 30%;
+      }
+
+      &:after {
+        @extend %innerBefore;
+        background-image: url(../images/btn/btnLevelUpDefault.png);
+        background-blend-mode: color;
+        background-color: rgba(0, 0, 0, 0);
+      }
+    }
+  }
+
+  &__nav {
+    aspect-ratio: 376/56;
+    width: clampF(160, 376);
+    position: relative;
+    background-image: url(~src/assets/images/btn/btnTabInactive.png);
+    @extend %CNRBGimage;
+    background-color: transparent;
+    flex: none;
+
+    &.active {
+      &:after {
+        opacity: 1;
+      }
+    }
+
+    span {
+      position: relative;
+      z-index: 99;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: clampF(12, 28);
+      line-height: 1;
+      text-align: center;
+      letter-spacing: minF(2);
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 minF(2) 0 #021622;
+    }
+
+    &__other {
+      width: clampF(200, 470);
+      //height: clampF(40,56);
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: Caladea, sans-serif;
+        font-weight: 700;
+        font-size: clampF(8, 24);
+        line-height: clampF(20, 32);
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      background-image: url(~src/assets/images/btn/btnTabActive.png);
+      @extend %CNRBGimage;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    @media (hover) {
+      &:hover {
+        &:after {
+          opacity: 1;
+        }
+      }
+    }
+
+    &:active {
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__deckButton {
+    --deckButtonBaseFilter: brightness(1) grayscale(0);
+    --deckButtonBaseTranslate: translateY(0);
+
+    &-retreat {
+      --deckButtonInnerHoverBG: url(../images/deckActions/btnRetreatHover.png);
+      --deckButtonInnerActiveBG: url(../images/deckActions/btnRetreatPressed.png);
+      --deckButtonBaseBG: url(../images/deckActions/baseRetreat.png);
+      --deckButtonInnerBG: url(../images/deckActions/btnRetreatDefault.png);
+      --deckButtonBlockLeft: #{-100 * $dw};
+      --deckButtonBlockright: inherit;
+
+      .btn__deckButton__iconBlock:before {
+        content: '';
+        position: absolute;
+        width: 105 * $dw;
+        aspect-ratio: 105/98;
+        bottom: -5 * $dw;
+        right: 11 * $dw;
+        background-image: url(../images/deckActions/iconRetreat.png);
+        @extend %CNRBGimage;
+      }
+    }
+
+    &-exit {
+      --deckButtonInnerHoverBG: url(../images/btn/exit-color.png);
+      --deckButtonInnerActiveBG: url(../images/btn/exit-color.png);
+      --deckButtonBaseBG: url(../images/btn/exit-color.png);
+      --deckButtonInnerBG: url(../images/btn/exit-color.png);
+      --deckButtonBlockLeft: #{-100 * $dw};
+      --deckButtonBlockright: inherit;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+
+      .btn__deckButton__inner:before {
+        background-size: 100% 100%;
+      }
+    }
+
+    &-battle {
+      --deckButtonBaseBG: url(../images/deckActions/baseBattle.png);
+      --deckButtonInnerBG: url(../images/deckActions/btnBattleDefault.png);
+      --deckButtonInnerHoverBG: url(../images/deckActions/btnBattleHover.png);
+      --deckButtonInnerActiveBG: url(../images/deckActions/btnBattlePressed.png);
+      --deckButtonBlockLeft: inherit;
+      --deckButtonBlockright: #{-78 * $dw};
+
+      .btn__deckButton__iconBlock:before {
+        content: '';
+        position: absolute;
+        width: 98 * $dw;
+        aspect-ratio: 1/1;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        margin: auto;
+        background-image: url(../images/deckActions/iconToBattle.png);
+        @extend %CNRBGimage;
+        z-index: 9999;
+      }
+
+      &-reply {
+        //background-image: url(../images/tournaments/button-green-bg.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+
+        &:hover {
+          //background-image: url(../images/tournaments/green-button-hover.png);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+        }
+
+        &:active {
+          //background-image: url(../images/tournaments/green-button-active.png);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+
+        }
+
+        .const {
+          display: flex;
+          gap: clampF(6, 13);
+          //background-image: url(../images/tournaments/price.png);
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+        }
+        .sword-block-absolute {
+          left: calc(100% - 25px);
+          top: -15px;
+          right: unset;
+        }
+      }
+
+    }
+
+    width: 282 * $dw;
+    aspect-ratio: 282/80;
+    z-index: 99;
+    position: relative;
+    background-color: transparent;
+    background-image: var(--deckButtonBaseBG);
+    @extend %CNRBGimage;
+    @media (hover) {
+      &:hover {
+        --deckButtonBaseFilter: brightness(1.5) grayscale(0);
+      }
+    }
+
+    &:active {
+      --deckButtonBaseFilter: brightness(0.8) grayscale(0.5);
+      --deckButtonBaseTranslate: translateY(2%);
+    }
+
+    &-voucher {
+      width: 643 * $dw;
+      aspect-ratio: 633/128;
+      --deckButtonInnerHoverBG: url(../images/deckActions/btnVoucherHover.webp);
+      --deckButtonInnerActiveBG: url(../images/deckActions/btnVoucherPressed.webp);
+      --deckButtonBaseBG: none;
+      --deckButtonInnerBG: url(../images/deckActions/btnVoucherDefault.webp);
+
+      @media (hover) {
+        &:hover {
+          //--deckButtonBaseFilter: unset;
+          //--deckButtonInnerBG: var(--deckButtonInnerHoverBG);
+        }
+      }
+
+      &:active {
+        --deckButtonBaseFilter: brightness(0.65) grayscale(0.5);
+        --deckButtonBaseTranslate: unset;
+        //--deckButtonInnerBG: var(--deckButtonInnerActiveBG);
+      }
+
+      &-count {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 52 * $dw;
+        aspect-ratio: 52/56;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        z-index: 2;
+        font-family: 'Caladea', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32 * $dw;
+        line-height: 1;
+        color: #fbfafa;
+        text-shadow: 0 2 * $dw 0 #12311c;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .btn__deckButton__inner {
+        text-indent: 80 * $dw;
+        padding-bottom: 10 * $dw;
+      }
+
+      .btn__deckButton__iconBlock {
+        width: 130 * $dw;
+        background: none;
+        right: unset;
+        left: 0;
+
+        &:before {
+          content: '';
+          position: absolute;
+          width: 130 * $dw;
+          aspect-ratio: 130/128;
+          bottom: 0;
+          right: 0;
+          background-image: url(../images/deckActions/voucher-icon.webp);
+          @extend %CNRBGimage;
+        }
+      }
+    }
+
+    &__inner {
+      flex: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+
+      &:before {
+        content: '';
+        position: absolute;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        pointer-events: none;
+        user-select: none;
+        transition: all 0.2s;
+        background-image: var(--deckButtonInnerBG);
+        @extend %CNRBGimage;
+        will-change: filter;
+        filter: var(--deckButtonBaseFilter);
+        transform: var(--deckButtonBaseTranslate);
+      }
+
+      span {
+        position: relative;
+        z-index: 5;
+        font-family: 'Caladea', serif;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36 * $dw;
+        line-height: 1;
+        letter-spacing: 2 * $dw;
+        text-transform: uppercase;
+        color: #fbfafa;
+        text-shadow: 0 3 * $dw 0 #03273c;
+        pointer-events: none;
+        user-select: none;
+      }
+    }
+
+    &__iconBlock {
+      position: absolute;
+      width: 146 * $dw;
+      aspect-ratio: 146 / 98;
+      background-image: url(../images/deckActions/iconFrame.png);
+      bottom: 0;
+      z-index: 999;
+      left: var(--deckButtonBlockLeft);
+      right: var(--deckButtonBlockright);
+      @extend %CNRBGimage;
+    }
+  }
+
+  &__FTUE {
+    position: absolute;
+    bottom: 0;
+    min-width: 120px;
+    height: 68px;
+    background-image: url(~src/assets/images/btn/btnFTUEWrapper.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    transition: filter 0.3s ease;
+    @media screen and (max-width: #{$mediaSm}) {
+      min-width: 60px;
+      height: 34px;
+    }
+
+    &:active {
+      .btn__FTUE__inner:before {
+        transform: translateY(2%) scale(0.99);
+      }
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        filter: brightness(120%);
+      }
+    }
+
+    &__inner {
+      width: fit-content;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 0 40px;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 36px;
+      text-align: center;
+      color: #fcfcfd;
+      text-shadow: 0 0.8px 0 #03273c;
+
+      &:before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 4;
+        will-change: contents;
+        background-image: url(~src/assets/images/btn/btnFTUEInner.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        transition: transform 0.2s;
+        transform: translateY(0) scale(1);
+      }
+
+      @media screen and (max-width: #{$mediaSm}) {
+        padding: 0 20px;
+        font-size: 14px;
+        line-height: 18px;
+      }
+
+      span {
+        position: relative;
+        z-index: 5;
+        margin-top: -8px;
+        opacity: 0;
+        animation: opacityCardBlock 0.5s ease-out forwards;
+        @media screen and (max-width: #{$mediaSm}) {
+          margin-top: -4px;
+        }
+      }
+    }
+  }
+
+  &__default {
+    position: relative;
+    width: 168px;
+    aspect-ratio: 168/56;
+    background-image: url(~src/assets/images/btn/btnDefaultWrapper.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    flex: none;
+
+    &.filter {
+      @media screen and (max-width: $mediaSm) {
+        width: 120px;
+        margin: 8px auto 8px 0;
+      }
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      width: 120px;
+      margin: 20px 0;
+    }
+
+    &__inner {
+      flex: none;
+      position: absolute;
+      aspect-ratio: 158/46;
+      width: calc(158 / 168 * 100%);
+      left: 3%;
+      top: 7%;
+      background-image: url(~src/assets/images/btn/btnDefaultBase.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 1px;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 2px 0 #03273c;
+
+      &__forTournaments {
+        height: 81.5%;
+
+      }
+
+      @media screen and (max-width: $mediaSm) {
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      span {
+        position: relative;
+        z-index: 10;
+        margin-top: -2%;
+      }
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.2s;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+
+      &:before {
+        background-image: url(~src/assets/images/btn/btnDefaultHover.png);
+      }
+
+      &:after {
+        background-image: url(~src/assets/images/btn/btnDefaultClick.png);
+      }
+    }
+
+    &:not(.disabled):not([disabled]):not(:disabled):active {
+      .btn__default__inner:after {
+        opacity: 1;
+      }
+    }
+
+    @media (hover) {
+      &:not(.disabled):not([disabled]):not(:disabled):hover {
+        .btn__default__inner:before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__refill {
+    position: absolute;
+    width: min(minF(640), 640px);
+    aspect-ratio: 640/120;
+    background-image: url(~src/assets/images/btn/btnRefillWarpper.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    flex: none;
+    left: 50%;
+    bottom: min(minF(55), 55px);
+    transform: translate(-50%, 0);
+
+    &__inner {
+      flex: none;
+      position: absolute;
+      aspect-ratio: 610/101;
+      width: calc(610 / 640 * 100%);
+      left: 2.4%;
+      top: 5%;
+      background-image: url(~src/assets/images/btn/btnRefillBase.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-style: normal;
+      font-weight: 700;
+      font-size: clampF(16, 46);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 minF(4) 0 #03273c;
+      padding: 0 4%;
+
+      .refillText {
+        z-index: 10;
+        position: relative;
+        margin: -2% auto 0;
+        line-height: 1;
+        transform: translateY(0);
+      }
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        z-index: 2;
+      }
+
+      &:before {
+        background-image: url(~src/assets/images/btn/btnRefillHover.png);
+      }
+
+      &:after {
+        background-image: url(~src/assets/images/btn/btnRefillClick.png);
+      }
+    }
+
+    &:not(.disabled):not([disabled]):not(:disabled):active {
+      .btn__refill__inner {
+        &::after {
+          opacity: 1;
+        }
+
+        .refillText {
+          transform: translateY(5%);
+        }
+
+        .btn__refillBlock {
+          transform: translateY(5%);
+        }
+      }
+    }
+
+    @media (hover) {
+      &:not(.disabled):not([disabled]):not(:disabled):hover {
+        .btn__refill__inner:before {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__refillBlock {
+    transform: translateY(0);
+
+    margin-top: -2%;
+    position: relative;
+    z-index: 10;
+    flex: none;
+    width: 44%;
+    aspect-ratio: 246/63;
+    background-image: url(~src/assets/images/btn/refillBanner.png);
+    @extend %CNRBGimage;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &__icon {
+      flex: none;
+      width: calc(45 / 246 * 100%);
+      aspect-ratio: 45/40;
+      align-self: flex-end;
+      margin-left: 12%;
+      background-image: url(~src/assets/images/btn/refillIcon.png);
+      @extend %CNRBGimage;
+    }
+
+    &__text {
+      margin-left: 10%;
+      font-size: clampF(16, 46);
+
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 0.04em;
+      color: #ffeda0;
+      text-shadow: 0 minF(2) 0 #03273c;
+    }
+  }
+
+  &__retreatMobile {
+    position: relative;
+    display: block;
+    width: 86px;
+    aspect-ratio: 84/24;
+    background-image: url(~src/assets/images/btn/retreatBaseM.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    flex: none;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translate(9.5%, 0);
+
+    &:before {
+      content: '';
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 0;
+      top: 50%;
+      width: 38%;
+      z-index: 99;
+      aspect-ratio: 1;
+      background-image: url(~src/assets/images/btn/retreatIcon.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    &__inner {
+      position: absolute;
+      aspect-ratio: 79/19;
+      width: 94%;
+      left: 2%;
+      top: 17%;
+      background-image: url(~src/assets/images/btn/retreatDMobile.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: flex;
+      justify-content: center;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 1.15;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fbfafa;
+      text-shadow: 0 1px 0 #03273c;
+
+      span {
+        position: relative;
+        z-index: 10;
+        margin-top: 3%;
+        margin-right: -9%;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.2s;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-image: url(~src/assets/images/btn/retreatCM.png);
+      }
+    }
+
+    &:not(.disabled):not([disabled]):not(:disabled):active {
+      .btn__default__inner:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__battleMobile {
+    position: relative;
+    display: block;
+    width: 110px;
+    aspect-ratio: 111/30;
+    background-image: url(~src/assets/images/btn/battleBM.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    flex: none;
+    margin-left: auto;
+    margin-right: auto;
+    transform: translate(-5.5%, 0);
+
+    &:before {
+      content: '';
+      position: absolute;
+      transform: translate(29%, -50%);
+      right: 0;
+      top: 50%;
+      width: 38%;
+      z-index: 99;
+      aspect-ratio: 1;
+      background-image: url(~src/assets/images/btn/battleIM.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    &__inner {
+      position: absolute;
+      aspect-ratio: 105/25;
+      width: 92%;
+      left: 5%;
+      top: 12%;
+      background-image: url(~src/assets/images/btn/battleDM.png);
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      display: flex;
+      justify-content: center;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 1;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fbfafa;
+      text-shadow: 0 1.5px 0 #03273c;
+
+      span {
+        position: relative;
+        z-index: 10;
+        margin-top: 4%;
+        margin-left: -15%;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.2s;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-image: url(~src/assets/images/btn/battleCM.png);
+      }
+    }
+
+    &:not(.disabled):not([disabled]):not(:disabled):active {
+      .btn__default__inner:after {
+        opacity: 1;
+      }
+    }
+  }
+}

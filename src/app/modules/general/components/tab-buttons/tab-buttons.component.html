@@ -1,0 +1,29 @@
+<div class="cardsNav soulCardsNav">
+  <div class="smallNavContainerSoul  ">
+    <div class="miniNavContainer ">
+      <div class="myButtonBack">
+        <button (click)="handleBack()" ontouchstart="" class="btn btn__back " tabindex="0">
+          <div class="btn__back__inner">
+            <img alt="Back Arrow" src="../../../../../assets/images/league/backBtn/btn_back_arrow.png">
+          </div>
+        </button>
+      </div>
+      <div class="ticketOrSoul ticketOrSoul--mt">
+
+        <ng-container *ngFor="let button of  buttonsText; let i = index">
+          <button
+            [disabled]="disabledButtons.includes(button)"
+            class="btn btn__nav "
+            (click)="handleSoul(button)"
+            [ngClass]="(buttonValue  === button ? 'active ':'' )+buttonsClass"
+          >
+            <span>{{ button | titlecase }}</span>
+          </button>
+        </ng-container>
+
+      </div>
+    </div>
+    <ng-content>
+    </ng-content>
+  </div>
+</div>

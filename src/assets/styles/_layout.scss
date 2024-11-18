@@ -1,0 +1,311 @@
+@use 'variables' as *;
+@use 'balance';
+
+html {
+  height: 100%;
+  transform: translate3d(0, 0, 0);
+  @media screen and (max-width: #{$mediaSm}) {
+    overflow-x: hidden;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  background-image: url(../images/home/bg.jpeg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  background-color: hwb(0 0% 100%);
+  background-color: lch(0% 50 50);
+  background-color: lab(0 0 0);
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  @media screen and (max-width: #{$mediaSm}) and (orientation: portrait) {
+    background-image: url(../images/home/bgM.png);
+  }
+}
+
+app-root,
+app-home,
+app-home,
+app-deck-builder,
+app-card-block,
+app-deck-filter,
+app-deck-slots,
+app-spell-card,
+app-tower-card,
+app-hero-card,
+app-slot,
+app-tower-card,
+app-cards-nav,
+app-deck-action,
+app-auth-desktop,
+app-login-desktop,
+app-register-desktop,
+app-battle-desktop,
+app-game-desktop,
+app-home-desktop,
+app-home-mobile,
+app-tower-card-block-desktop,
+app-towers-card-block-mobile,
+app-spells-card-block-desktop,
+app-register-desktop,
+app-spell-slot,
+app-tower-slot-block,
+app-spell-slot-block,
+app-fiends-info-popup,
+app-spells-card-block-mobile,
+app-spell-info,
+app-tower-info,
+app-hero-info,
+app-fiend-souls,
+app-league-rewards,
+app-max-levels,
+app-battle-log,
+app-my-defense-deck,
+app-my-defense-towers,
+app-my-defense-spells,
+app-my-defense-heroes,
+app-tower-card-info,
+app-spell-card-info,
+app-hero-card-info,
+app-empty-card-block,
+app-heroes-card-block-mobile,
+app-battle-rule-icon,
+app-game,
+app-log-item,
+app-landing,
+app-login,
+app-auth,
+app-soul-shop,
+app-select-dropdown,
+app-tab-buttons,
+app-tournaments-wrapper,
+app-tournaments,
+app-league-dropdown,
+app-table-tournaments,
+app-tournaments-history,
+app-date-dropdown,
+app-reward-icon,
+app-ticket-balance,
+app-credits-balance,
+app-pack-animation,
+app-soul-box-shop,
+app-soul-box-open-popup,
+app-tickets-shop,
+app-tournaments-game-popup {
+  display: contents;
+}
+
+::backdrop {
+  background: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.hP {
+  &-grid {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  &__hints {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 15px;
+    position: absolute;
+    top: 9.5%;
+    @media screen and (max-width: #{$mediaT}), (max-height: #{$mediaT}) {
+      gap: 4px;
+    }
+  }
+
+  &__logo {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    position: absolute;
+    top: 9.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    height: min(19.5%, 25vw);
+
+    > div {
+      height: 100%;
+      @media screen and (max-width: #{$mediaSm}) {
+        height: 100%;
+        max-height: inherit;
+      }
+    }
+  }
+
+  &__settings {
+    position: absolute;
+    right: 0;
+    top: clampF(96, 192);
+
+    .settingsBlock {
+      --settingSize: 46px;
+      --settingMargin: 24px;
+      margin-right: var(--settingMargin);
+      width: var(--settingSize);
+      height: var(--settingSize);
+      border-radius: var(--settingSize);
+      background-image: url(~src/assets/images/home/iconSettings.png);
+      align-items: flex-start;
+      justify-content: flex-end;
+      @extend %CNRBGimage;
+      flex: none;
+      @media screen and (max-width: #{$mediaSm}) {
+        --settingSize: 32px;
+        --settingMargin: 8px;
+      }
+      @media (hover: hover) {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__balance {
+    position: absolute;
+    right: 0;
+    top: 1%;
+    margin-right: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    @media screen and (max-width: #{$mediaSm}) {
+      margin-right: 8px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+  }
+
+  &__diff {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 27%;
+    z-index: 3;
+    height: min(36%, 35vw);
+  }
+
+  &__battle {
+    transform-style: preserve-3d;
+    perspective: 400px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: min(65%, 27% + 37vw);
+    height: 15.6%;
+
+    @media screen and (max-width: #{$mediaSm}) {
+      height: 10.6%;
+      min-height: 46px;
+    }
+  }
+
+  &__packs {
+    position: absolute;
+    left: 52%;
+    transform: translateX(-50%);
+    top: 85%;
+  }
+
+  &__btn-market {
+    position: absolute;
+    left: 0;
+    bottom: 210px;
+    @media screen and (max-width: #{$mediaSm}) {
+      bottom: 70px;
+    }
+    @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+      bottom: 120px;
+    }
+  }
+
+  &__btn-rewards {
+    position: absolute;
+    left: 0;
+    bottom: clampF(132, 488);
+
+    @media screen and (max-width: #{$mediaSm}) {
+      bottom: 135px;
+    }
+
+    @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+      bottom: 235px;
+    }
+  }
+
+  &__btn-leagues {
+    position: absolute;
+    right: 0;
+    bottom: 220px;
+
+    @media screen and (max-width: #{$mediaSm}) {
+      bottom: 75px;
+    }
+
+    @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+      bottom: 110px;
+    }
+  }
+
+  &__btn-souls {
+    position: absolute;
+    left: 0;
+    bottom: 36px;
+
+    @media screen and (max-width: #{$mediaSm}) {
+      bottom: 10px;
+    }
+  }
+
+  &__btn-open {
+    position: absolute;
+    right: 0;
+    bottom: 210px;
+    @media screen and (max-width: #{$mediaSm}) {
+      bottom: 70px;
+    }
+    @media screen and (max-width: #{$mediaSm}) and (min-width: $mediaT) and (min-height: #{$mediaT}) {
+      bottom: 120px;
+    }
+  }
+
+  &__btn-defenses {
+    position: absolute;
+    right: 0;
+    bottom: 36px;
+    @media screen and (max-width: #{$mediaSm}) {
+      bottom: 10px;
+    }
+  }
+}
+
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  object-fit: cover;
+  z-index: -3;
+}

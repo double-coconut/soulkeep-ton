@@ -1,0 +1,20 @@
+<div class="loading">
+  <div class="logoBlock"></div>
+  <div class="loading__frame">
+    <div
+      [ngStyle]="{ width: loadingProgress + '%' }"
+      class="loading__bar"
+    ></div>
+  </div>
+  <button
+    (click)="hideLoader()"
+    [disabled]="((loadingProgress | withDelay | async) || 0) < 100"
+    class="btn btn__stateOne btn__stateOne--center"
+    clickSound
+    ontouchstart=""
+  >
+    <div class="btn__stateOne__inner">
+      <span>Start</span>
+    </div>
+  </button>
+</div>

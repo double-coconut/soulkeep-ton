@@ -1,0 +1,233 @@
+@use 'variables' as *;
+
+.rarityElement {
+  &--whiteTitle {
+    color: #FFFFFF;
+    font-family: Caladea sans-serif;
+    font-size: clampF(20,48);
+    line-height: clampF(30,56);
+  }
+
+  &.leagueRarity {
+    @media screen and (max-width: 600px) and (orientation: portrait) {
+      flex-basis: 46%;
+    }
+
+    .rarityElement__logo {
+      @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+        width: 96px;
+      }
+      @media screen and (max-width: 824px), (max-height: $mediaH) {
+        width: 106px;
+      }
+      @media screen and (max-width: 600px) and (orientation: portrait) {
+        width: 148px;
+      }
+    }
+
+    .rarityElement__name {
+      @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      @media screen and (max-width: 824px), (max-height: $mediaH) {
+        font-size: 16px;
+        margin-bottom: 16px;
+      }
+      @media screen and (max-width: 600px) and (orientation: portrait) {
+        font-size: 18px;
+        margin-bottom: 16px;
+      }
+    }
+
+    .rarityElement__count,
+    .rarityElement__progress {
+      @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+        width: 100%;
+      }
+      @media screen and (max-width: 824px), (max-height: $mediaH) {
+        width: 100%;
+        font-size: 16px;
+      }
+      @media screen and (max-width: 600px) and (orientation: portrait) {
+        width: 100%;
+        font-size: 24px;
+      }
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__logo {
+    flex: none;
+    width: minF(155);
+    aspect-ratio: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &--common {
+      background-image: url(~src/assets/images/league/Common.png);
+    }
+
+    &--rare {
+      background-image: url(~src/assets/images/league/Rare.png);
+    }
+
+    &--epic {
+      background-image: url(~src/assets/images/league/Epic.png);
+    }
+
+    &--legendary {
+    }
+
+    &--sword {
+      margin-top: clampF(5,24);
+      margin-bottom: clampF(5,24);
+      //background-image: url(~src/assets/images/soulshop/sword.png);
+    }
+    &--soul-box {
+      margin-top: clampF(5,24);
+      margin-bottom: clampF(5,24);
+    }
+  }
+
+  &__name {
+    font-style: normal;
+    font-weight: 700;
+    font-size: minF(18);
+    line-height: minF(22);
+    text-align: center;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin-bottom: minF(16);
+    text-transform: uppercase;
+  }
+
+  &__count,
+  &__progress {
+    flex: none;
+    width: minF(155);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fcfcfd;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__count {
+    font-size: minF(24);
+    aspect-ratio: 155/45;
+    background-image: url(~src/assets/images/league/rarityCounter.png);
+  }
+
+  &__progress {
+    font-size: minF(20);
+    aspect-ratio: 155/40 auto;
+    width: minF(195);
+    background-image: url(~src/assets/images/league/rarityProgress.png);
+    position: relative;
+
+    span {
+      display: block;
+      padding: 0 10px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+  }
+
+  &__progressBar {
+    left: 4%;
+    top: 11%;
+    position: absolute;
+    width: 91%;
+    height: 80%;
+    border-radius: 4px;
+    overflow: hidden;
+
+    &__inner {
+      height: 100%;
+      background-image: url(~src/assets/images/home/bloodBarFull.png);
+      background-size: cover;
+    }
+  }
+
+  &__shop {
+    width: minF(230);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FBEC98;
+    letter-spacing: minF(2);
+    background-size: contain;
+    background-repeat: no-repeat;
+    aspect-ratio: 230/64;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    padding: 0;
+    background-color: transparent;
+    font-family: "Caladea", sans-serif;
+
+    &-price {
+      text-indent: minF(20);
+      font-size: minF(40);
+      background-image: url(~src/assets/images/soulshop/shop-price.webp);
+      cursor: pointer;
+      &:active{
+        background-image: url(~src/assets/images/soulshop/active-button.png);
+      }
+      &:hover{
+        background-image: url(~src/assets/images/soulshop/hover-button.png);
+      }
+    }
+
+    &-soul {
+      text-indent: minF(20);
+      font-size: minF(40);
+      background-image: url(~src/assets/images/soulshop/soul.png);
+      cursor: pointer;
+      &:active{
+        background-image: url(~src/assets/images/soulshop/soul-active.png);
+      }
+      &:hover{
+        background-image: url(~src/assets/images/soulshop/soul-active.png);
+      }
+    }
+
+    &-coin {
+      text-indent: minF(20);
+      font-size: minF(40);
+      background-image: url(~src/assets/images/soulshop/bottom-ticket-bg.png);
+      cursor: pointer;
+      &:active{
+        background-image: url(~src/assets/images/soulshop/bottom-ticket-bg-active.png);
+
+      }
+      &:hover{
+        background-image: url(~src/assets/images/soulshop/bottom-ticket-bg-hover.png);
+
+      }
+    }
+
+    &-purchased {
+      text-indent: minF(42);
+      font-size: minF(26);
+      background-image: url(~src/assets/images/soulshop/shop-purchased.webp);
+    }
+  }
+}

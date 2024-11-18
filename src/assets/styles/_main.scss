@@ -1,0 +1,38 @@
+@use 'variables' as *;
+
+@use 'fonts';
+@use 'titleGlobal';
+@use '_loader';
+@use '_loaderOverlay';
+@use 'buttons';
+@use 'layout';
+@use 'deckBuilderCards';
+@use 'landing';
+@use 'difficulty';
+@use 'progress';
+@use 'ticket';
+@use 'souls-buy';
+@use 'popup';
+@use 'titleFrame';
+@use 'league';
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  @extend %scrollBar;
+  font-family: 'Caladea', sans-serif;
+}
+
+.pointer-events-none {
+  pointer-events: none;
+}
+
+.pointer-events-all {
+  pointer-events: all;
+}
+
+button {
+  cursor: pointer;
+}

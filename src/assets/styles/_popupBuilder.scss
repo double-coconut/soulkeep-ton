@@ -1,0 +1,847 @@
+@use 'variables' as *;
+@use 'popupDeckTitle';
+@use 'wave';
+@use 'spsBlock';
+@use 'popupRulesBlock';
+@use 'popupCloseButton';
+@use 'popupRefillBlock';
+@use 'popupDefenses';
+
+.popupTitle {
+  &--top {
+    margin: minF(24) 0 minF(40);
+  }
+
+  &--bottom {
+    margin: minF(40) 0 minF(24);
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-weight: 700;
+  font-size: clampF(14, 32);
+  line-height: 125%;
+  text-align: center;
+  letter-spacing: minF(2);
+  text-transform: uppercase;
+  color: #ffffff;
+
+  span {
+    padding: 0 minF(64);
+    background-acolor: rgba(0, 0, 0, 0.5);
+    clip-path: polygon(
+        minF(24) 0%,
+        calc(100% - minF(24)) 0,
+        100% 50%,
+        calc(100% - minF(24)) 100%,
+        minF(24) 100%,
+        0% 50%
+    );
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: minF(88);
+    aspect-ratio: 88/24;
+    background-image: url(~src/assets/images/home/horizleft_divider-1.png);
+    background-size: contain;
+  }
+
+  &:before {
+    right: calc(minF(8) + 100%);
+  }
+
+  &:after {
+    left: calc(minF(8) + 100%);
+    transform: scale(-1, 1);
+  }
+}
+
+.leaguePF {
+  position: relative;
+  z-index: 9;
+  height: 85%;
+  max-height: 70vw;
+  width: 100%;
+  max-width: 1348px;
+  padding: 24px 86px 72px;
+  opacity: unset !important;
+  animation: none !important;
+  transform: none !important;
+  margin-top: 5%;
+  @media screen and (max-width: $mediaSm) {
+    padding: 10px 46px 36px;
+    max-height: 85%;
+
+    .deckTitle {
+      transform: translateX(-50%) scale(0.6);
+    }
+  }
+  @media screen and (max-width: $mediaT) {
+    width: 100%;
+    padding: 6px 16px 16px;
+  }
+
+  &__border {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    border-image: url(~src/assets/images/league/leaguePopupFrame.png);
+    border-image-slice: calc(308 / 840 * 100%) calc(270 / 1484 * 100%) fill;
+    border-image-width: 308px 270px;
+    pointer-events: none;
+    @media screen and (max-width: $mediaSm) {
+      border-image-width: 154px 135px;
+      border-width: 50px;
+      border-style: solid;
+    }
+    @media screen and (max-width: $mediaT) {
+      border-image-width: 77px 68px;
+    }
+  }
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(~src/assets/images/league/leaguePopupPanel.png);
+    background-size: 100% 100%;
+    border-radius: 20px 20px 0 0;
+    overflow: hidden;
+
+    &-in {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      @media screen and (max-width: $mediaSm) {
+        overflow-y: auto;
+      }
+    }
+  }
+
+  .leagueInfoBlock {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: clampF(8, 16);
+    height: 36%;
+    background-image: url(~src/assets/images/league/leaguePopupGlow.png);
+    background-size: 120% 120%;
+    background-position: bottom center;
+
+    &__wrapper {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clampF(18, 38);
+      margin-top: 3%;
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: clampF(4, 8);
+    }
+
+    &__title {
+      font-weight: 700;
+      font-size: clampF(16, 32);
+      line-height: 1.25;
+      letter-spacing: minF(2);
+      text-transform: uppercase;
+      color: #eb5757;
+      -webkit-text-stroke: minF(1) #200909;
+    }
+
+    &__subTitle {
+      font-weight: 700;
+      font-size: clampF(20, 40);
+      line-height: 1;
+      letter-spacing: minF(2);
+      color: #e4b64d;
+      -webkit-text-stroke: minF(1) #260f0b;
+      text-shadow: 0 minF(2) minF(2) rgba(18, 23, 31, 0.8);
+    }
+
+    &__icon {
+      width: clampF(100, 200);
+
+      .avatar {
+        width: 100%;
+        height: unset;
+      }
+    }
+  }
+
+  .line {
+    width: 100%;
+    height: minF(8);
+    background-image: url(~src/assets/images/league/separatorH.png);
+    background-size: 100% 100%;
+    margin-top: minF(-4);
+  }
+
+  .spsBlock {
+    padding: clampF(12, 24);
+
+    &:before,
+    &:after {
+      content: '';
+      flex: 1;
+    }
+
+    .league__block__content {
+      margin: 0;
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, minF(-15));
+    bottom: 0;
+    margin: 0 !important;
+    width: clampF(120, 210);
+    font-size: clampF(16, 32);
+  }
+}
+
+.popupDBuilder {
+  &__frame {
+    position: relative;
+    margin-top: 4%;
+    width: 75%;
+    height: 80%;
+    max-height: 55vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-image: url(~src/assets/images/deckBuilder/popupFrame.png);
+    border-image-slice: calc(308 / 840 * 100%) calc(270 / 1484 * 100%) fill;
+    border-image-width: 308px 270px;
+    padding: 100px 164px;
+
+    &.game-wrapper {
+      width: 95%;
+      height: unset;
+      max-width: 956px;
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      border-image-width: 154px 135px;
+      padding: 65px 75px;
+    }
+    @media screen and (max-width: $mediaT) {
+      width: 100%;
+      border-image-width: 77px 68px;
+      padding: 40px 34px;
+    }
+
+    &--league {
+      border-image: url(~src/assets/images/league/popupFrame.png);
+      border-image-slice: calc(308 / 840 * 100%) calc(270 / 1484 * 100%) fill;
+      border-image-width: 308px 270px;
+    }
+
+    &--refill {
+      min-width: 320px;
+      width: 54%;
+      max-width: 1029px;
+      max-height: 84%;
+      height: unset;
+      aspect-ratio: 1029/762;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+    }
+
+    &--potential {
+      max-width: 1030px;
+      max-height: 820px;
+      min-height: 350px;
+
+      @media all and (max-height: 400px) {
+        min-height: 230px;
+      }
+
+      .spsBlock .league__block__content {
+        margin-bottom: auto;
+      }
+    }
+
+    &--droprate {
+      max-width: 1030px;
+      min-height: 300px;
+      max-height: clampF(300, 500);
+
+      @media all and (max-height: 400px) {
+        min-height: 230px;
+      }
+
+      .league__block__title {
+        display: none;
+      }
+    }
+  }
+
+  &__waves {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    @media screen and (max-width: $mediaSm) {
+      gap: 40px;
+    }
+  }
+
+  &__wavesContainer {
+    flex: 1;
+    width: 100%;
+
+    &--wave {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 30px 0;
+      @extend %smoothScroll;
+
+      @media screen and (max-width: 600px) and (orientation: landscape) {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 16px 0;
+      }
+    }
+
+    &--info {
+      width: 100%;
+      height: 100%;
+      background-image: url(~src/assets/images/deckBuilder/wave-info.png);
+      background-size: 100% 100%;
+      padding: 0 16px 0 32px;
+      overflow: hidden;
+      @media screen and (max-width: $mediaSm) {
+        padding: 0 8px 0 16px;
+        flex-basis: 30%;
+      }
+    }
+  }
+
+  &__wavesContent {
+    width: 100%;
+    height: 100%;
+    padding: 32px 16px 32px 32px;
+    @media screen and (max-width: $mediaSm) {
+      padding: 16px 8px 16px 16px;
+    }
+    @extend %smoothScroll;
+
+    &__title {
+      font-style: normal;
+      font-weight: 700;
+      font-size: clampF(18, 32);
+      line-height: 125%;
+      letter-spacing: minF(2);
+      text-transform: uppercase;
+      color: #1e1b16;
+    }
+
+    &__content {
+      font-weight: 700;
+      font-size: clampF(14, 24);
+      line-height: 1;
+      letter-spacing: minF(2);
+      color: rgba(30, 27, 22, 0.7);
+
+      & > .special:first-child {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  &__rules {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 8px 0;
+
+    &:before,
+    &:after {
+      content: '';
+      flex: 1;
+    }
+
+    @media screen and (max-width: $mediaSm) {
+      gap: 16px;
+    }
+    @extend %smoothScroll;
+  }
+
+  &.size-lg {
+    .cardInfoWrapper {
+      max-width: 700px;
+    }
+
+    .purchaseButton {
+      min-width: clampF(231, 462);
+      padding: clampF(14, 28) clampF(23, 46);
+
+      .btn__default__inner__forTournaments {
+        white-space: nowrap;
+        font-size: clampF(16, 32);
+        line-height: clampF(20, 40);
+      }
+
+    }
+  }
+
+  .cardInfoWrapper {
+    width: 90%;
+    height: 90%;
+    max-width: 420px;
+    max-height: 585px;
+
+    &.box-popup {
+      max-width: clampF(614, 1228);
+      max-height: clampF(300, 600);
+    }
+
+    &--fitContent {
+      min-width: 30%;
+      min-height: 0;
+      height: auto;
+
+      .card-info__view {
+        text-align: center;
+
+        &_tournament {
+          &:not(.soul-box-popup-wrapper) {
+            padding: clampF(48, 96) clampF(28, 56) !important;
+          }
+        }
+
+        .rDescription {
+          margin: 6% 0;
+        }
+      }
+    }
+
+    .card-info {
+      &__content {
+        background-size: 96% 98%;
+      }
+
+      &__view {
+        //@extend %smoothScroll;
+        width: 100%;
+        height: 100%;
+        padding: 24px;
+        @media screen and (max-width: $mediaSm) {
+          padding: 12px;
+        }
+
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      &__close {
+        display: block;
+        width: 48px;
+        height: 48px;
+        cursor: pointer;
+        z-index: 12;
+        @media screen and (max-width: $mediaSm) {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    &__btn {
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 50%);
+      bottom: 0;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .leaguePopupBlock {
+    width: 100%;
+    z-index: -1;
+    background: green;
+  }
+
+  .titleBlock {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: clampF(12, 30);
+    text-transform: uppercase;
+    color: #fbfafa;
+  }
+
+  &.next-league-ready {
+    text-transform: uppercase;
+
+    .spsBlock {
+      margin-bottom: 25px;
+    }
+
+    .popupDBuilder__frame {
+      width: unset;
+      height: unset;
+    }
+
+    .next-league-ready__options {
+      &__option {
+        font-family: 'Caladea', sans-serif;
+        color: #fcfcfd;
+        font-size: clampF(14, 32);
+        font-weight: 700;
+        text-align: left;
+        display: flex;
+        align-items: center;
+
+        a {
+          color: #54afc8;
+        }
+
+        &.or {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding: 4px;
+        }
+
+        &__icon {
+          width: clampF(56, 96);
+          height: clampF(56, 96);
+          background-size: contain;
+          background-position: center;
+          margin-right: clampF(15, 24);
+
+          &.rank {
+            //background-image: url(~src/assets/images/tournaments/ranks.png);
+          }
+
+          &.tourney {
+            //background-image: url(~src/assets/images/tournaments/tourneytoken.png);
+          }
+
+          &.souls {
+            //background-image: url(~src/assets/images/tournaments/souls.png);
+          }
+        }
+      }
+    }
+  }
+
+  .margin-bottom {
+    margin-bottom: clampF(20, 40);
+  }
+}
+
+
+.tournamentInfoTitle {
+  color: #FCFCFD;
+  font-size: clampF(20, 32);
+  line-height: clampF(22, 40);
+  font-weight: 700;
+}
+
+
+.purchaseButton {
+  cursor: pointer;
+  background: inherit;
+  //background-image: url("~src/assets/images/tournaments/button-green-bg.png");
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-family: Caladea, sans-serif;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  border: none;
+  color: #FCFCFD;
+  height: auto;
+  min-width: clampF(172, 344);
+  min-height: clampF(64, 128);
+
+  padding: clampF(20, 40) clampF(37, 75) clampF(22, 45);
+
+  .btn__default__inner__forTournaments {
+    font-size: clampF(22, 40);
+    font-weight: 400;
+    line-height: clampF(25, 48);
+  }
+
+  &:hover {
+    //background-image: url("~src/assets/images/tournaments/green-button-hover.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &:active {
+    //background-image: url("~src/assets/images/tournaments/green-button-active.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &:disabled {
+    //background-image: url("~src/assets/images/tournaments/green-button-dis.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  span {
+    margin: auto 0;
+  }
+
+
+}
+
+
+.closeContainer {
+  position: relative;
+
+  .closeButton {
+    position: absolute;
+    left: 105%;
+    top: -22px;
+    width: clampF(32, 50);
+    height: clampF(32, 50);
+  }
+}
+
+
+.box-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clampF(48, 96);
+
+  .invalid-info {
+    color: white;
+  }
+
+  .info-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: clampF(8, 16);
+
+
+    .image-info {
+      display: flex;
+      gap: clampF(18, 36);
+      align-items: center;
+      justify-content: flex-start;
+
+      .span_common {
+        opacity: 1;
+        animation: fadeIn 3.7s;
+      }
+      .span_rare{
+        opacity: 1;
+        animation: fadeIn 4.2s;
+      }
+      .span_epic{
+        opacity: 1;
+        animation: fadeIn 4.7s;
+      }
+      .span_legendary{
+        opacity: 1;
+        animation: fadeIn 6.3s;
+      }
+      img {
+        width: clampF(51, 102);
+        height: clampF(51, 102);
+        position: relative;
+      }
+
+      .common {
+        animation: Common 4.5s ease-in alternate;
+        opacity: 1;
+      }
+
+      .rare {
+        animation: Rare 4.5s ease-in alternate;
+        opacity: 1;
+      }
+
+      .epic {
+        animation: Epic 4.5s ease-in alternate;
+        opacity: 1;
+      }
+
+      .legendary {
+        animation: Legendary 5s ease-in alternate ;
+        opacity: 1;
+      }
+
+      span {
+        font-family: Caladea, sans-serif;
+        font-size: clampF(24, 48);
+        font-weight: 700;
+        line-height: clampF(28, 56);
+        color: white;
+      }
+    }
+  }
+}
+
+.in-bottom {
+  width: clampF(40, 80);
+  height: clampF(40, 80);
+  bottom: clampF(-20, -40);
+}
+
+@keyframes Common {
+  0% {
+    scale: 0.1;
+    left: -90%;
+    bottom: -100px;
+    opacity: 0;
+  }
+  30% {
+    scale: 0.1;
+    left: -90%;
+    bottom: -100px;
+    opacity: 0;
+  }
+  40% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+  100% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+
+}
+
+
+@keyframes Rare {
+  0% {
+    scale: 0.1;
+    left: -90%;
+    bottom: 0;
+    opacity: 0;
+  }
+  40% {
+    scale: 0.1;
+    left: -90%;
+    bottom: 0;
+    opacity: 0;
+  }
+  50% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+
+  100% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+
+}
+
+@keyframes Epic {
+  0% {
+    scale: 0.1;
+    left: -90%;
+    opacity: 0;
+    bottom: 100px;
+  }
+  50% {
+    scale: 0.1;
+    left: -90%;
+    opacity: 0;
+    bottom: 100px;
+  }
+  60% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+
+
+  100% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+
+}
+
+@keyframes Legendary {
+  0% {
+    scale: 0.1;
+    left: -90%;
+    bottom: 200px;
+    opacity: 0;
+  }
+  60% {
+    scale: 0.1;
+    left: -90%;
+    bottom: 200px;
+    opacity: 0;
+  }
+  70% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+
+  100% {
+    scale: 1;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+  }
+
+}

@@ -1,0 +1,46 @@
+@use 'variables' as *;
+
+.loadingOverlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 999999;
+
+  @media screen and (max-width: #{$mediaXs}) {
+  }
+
+  &__animation {
+    width: 200px;
+    height: 200px;
+
+    background-image: url(../images/loader-overlay/loader.png);
+    background-size: 6000px auto;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    aspect-ratio: 1;
+    animation-name: loader-anim;
+    animation-duration: 1s;
+    animation-iteration-count: 9999;
+    animation-timing-function: steps(30);
+
+    flex: none;
+    @media screen and (max-width: #{$mediaXs}) {
+    }
+
+    @keyframes loader-anim {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: -6000px 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,316 @@
+@import "variables";
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src:
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?2v0tk5') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?2v0tk5') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?2v0tk5##{$icomoon-font-family}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.tdIcon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tdIcon-attack-range {
+  &:before {
+    content: $tdIcon-attack-range;
+  }
+}
+.tdIcon-attack-rate {
+  &:before {
+    content: $tdIcon-attack-rate;
+  }
+}
+.tdIcon-battle-uses {
+  &:before {
+    content: $tdIcon-battle-uses;
+  }
+}
+.tdIcon-damage-blast {
+  &:before {
+    content: $tdIcon-damage-blast;
+  }
+}
+.tdIcon-damage-duration {
+  &:before {
+    content: $tdIcon-damage-duration;
+  }
+}
+.tdIcon-damage-sword {
+  &:before {
+    content: $tdIcon-damage-sword;
+  }
+}
+.tdIcon-damage-type {
+  &:before {
+    content: $tdIcon-damage-type;
+  }
+}
+.tdIcon-double-damage {
+  &:before {
+    content: $tdIcon-double-damage;
+  }
+}
+.tdIcon-dps {
+  &:before {
+    content: $tdIcon-dps;
+  }
+}
+.tdIcon-duration {
+  &:before {
+    content: $tdIcon-duration;
+  }
+}
+.tdIcon-hearts {
+  &:before {
+    content: $tdIcon-hearts;
+  }
+}
+.tdIcon-higher-chance-of-critical-hit {
+  &:before {
+    content: $tdIcon-higher-chance-of-critical-hit;
+  }
+}
+.tdIcon-immobilize {
+  &:before {
+    content: $tdIcon-immobilize;
+  }
+}
+.tdIcon-increase-attack-by {
+  &:before {
+    content: $tdIcon-increase-attack-by;
+  }
+}
+.tdIcon-increase-chance-of-fiend-souls {
+  &:before {
+    content: $tdIcon-increase-chance-of-fiend-souls;
+  }
+}
+.tdIcon-increase-speed-by {
+  &:before {
+    content: $tdIcon-increase-speed-by;
+  }
+}
+.tdIcon-make-fiends {
+  &:before {
+    content: $tdIcon-make-fiends;
+  }
+}
+.tdIcon-mana-regeneration-rate {
+  &:before {
+    content: $tdIcon-mana-regeneration-rate;
+  }
+}
+.tdIcon-more-refund-when-selling-tower {
+  &:before {
+    content: $tdIcon-more-refund-when-selling-tower;
+  }
+}
+.tdIcon-number-of-fiends-hit {
+  &:before {
+    content: $tdIcon-number-of-fiends-hit;
+  }
+}
+.tdIcon-number-of-fiends-to-convert-to-bring-to-your-team {
+  &:before {
+    content: $tdIcon-number-of-fiends-to-convert-to-bring-to-your-team;
+  }
+}
+.tdIcon-poison {
+  &:before {
+    content: $tdIcon-poison;
+  }
+}
+.tdIcon-poison-duration {
+  &:before {
+    content: $tdIcon-poison-duration;
+  }
+}
+.tdIcon-reduce-cost-of-mana {
+  &:before {
+    content: $tdIcon-reduce-cost-of-mana;
+  }
+}
+.tdIcon-reduce-health {
+  &:before {
+    content: $tdIcon-reduce-health;
+  }
+}
+.tdIcon-reduce-magic-resistance-by {
+  &:before {
+    content: $tdIcon-reduce-magic-resistance-by;
+  }
+}
+.tdIcon-seconds {
+  &:before {
+    content: $tdIcon-seconds;
+  }
+}
+.tdIcon-slowdown {
+  &:before {
+    content: $tdIcon-slowdown;
+  }
+}
+.tdIcon-slowdown-duration {
+  &:before {
+    content: $tdIcon-slowdown-duration;
+  }
+}
+.tdIcon-target-fiends {
+  &:before {
+    content: $tdIcon-target-fiends;
+  }
+}
+.tdIcon-towers {
+  &:before {
+    content: $tdIcon-towers;
+  }
+}
+.tdIcon-uses {
+  &:before {
+    content: $tdIcon-uses;
+  }
+}
+.tdIcon-variant {
+  &:before {
+    content: $tdIcon-variant;
+  }
+}
+.tdIcon-random-spell {
+  &:before {
+    content: $tdIcon-random-spell;
+  }
+}
+.tdIcon-faster-spawn {
+  &:before {
+    content: $tdIcon-faster-spawn;
+  }
+}
+.tdIcon-more-spawn {
+  &:before {
+    content: $tdIcon-more-spawn;
+  }
+}
+.tdIcon-ability-interval {
+  &:before {
+    content: $tdIcon-ability-interval;
+  }
+}
+.tdIcon-damage-multiplier {
+  &:before {
+    content: $tdIcon-damage-multiplier;
+  }
+}
+.tdIcon-soul-token {
+  &:before {
+    content: $tdIcon-soul-token;
+  }
+}
+.tdIcon-physical-res {
+  &:before {
+    content: $tdIcon-physical-res;
+  }
+}
+.tdIcon-magical-res {
+  &:before {
+    content: $tdIcon-magical-res;
+  }
+}
+.tdIcon-random-tower {
+  &:before {
+    content: $tdIcon-random-tower;
+  }
+}
+.tdIcon-less-mana {
+  &:before {
+    content: $tdIcon-less-mana;
+  }
+}
+.tdIcon-melee-damage {
+  &:before {
+    content: $tdIcon-melee-damage;
+  }
+}
+.tdIcon-stronger-damage {
+  &:before {
+    content: $tdIcon-stronger-damage;
+  }
+}
+.tdIcon-immune-to-imobilization {
+  &:before {
+    content: $tdIcon-immune-to-imobilization;
+  }
+}
+.tdIcon-speed {
+  &:before {
+    content: $tdIcon-speed;
+  }
+}
+.tdIcon-backslide-duration {
+  &:before {
+    content: $tdIcon-backslide-duration;
+  }
+}
+.tdIcon-ranged-damage {
+  &:before {
+    content: $tdIcon-ranged-damage;
+  }
+}
+.tdIcon-melee {
+  &:before {
+    content: $tdIcon-melee;
+  }
+}
+.tdIcon-lock-on-damage {
+  &:before {
+    content: $tdIcon-lock-on-damage;
+  }
+}
+.tdIcon-higer-hp {
+  &:before {
+    content: $tdIcon-higer-hp;
+  }
+}
+.tdIcon-ranged {
+  &:before {
+    content: $tdIcon-ranged;
+  }
+}
+.tdIcon-add-mana {
+  &:before {
+    content: $tdIcon-add-mana;
+  }
+}
+.tdIcon-hit-points {
+  &:before {
+    content: $tdIcon-hit-points;
+  }
+}
+.tdIcon-fatigue {
+  &:before {
+    content: $tdIcon-fatigue;
+  }
+}
+
+.soul-box-canvas-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: clampF(256, 512);
+  flex: 1.5;
+}

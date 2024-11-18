@@ -1,0 +1,619 @@
+@use 'variables' as *;
+
+.highlightTower {
+  .cardBlock__wrapper {
+    opacity: 1;
+    animation: none;
+
+    app-tower-card:first-child,
+    app-spell-card:first-child {
+      .cardNFT {
+        position: relative;
+        z-index: 100000;
+
+        &:hover {
+          .cardNFT__info {
+            opacity: 0;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      aspect-ratio: 309/598;
+      width: 97px;
+      top: calc(var(--top) * 1px + 20px);
+      left: calc(var(--left) * 1px + 20px);
+      //background-image: url(~src/assets/images/FTUE/handFTUE.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      transform: scale(-1, -1) rotate(75deg);
+      z-index: 100000;
+      animation: handAnimation 1.5s linear infinite;
+    }
+  }
+
+  &.mobile {
+    .cardBlock__wrapper:before {
+      z-index: 1000000;
+      top: calc(var(--top) * 1px - 90px);
+      width: 70px;
+    }
+  }
+}
+
+.cardBlock {
+  width: 100%;
+  height: calc(100% - 190px);
+
+  &__elementEmpty {
+    margin: auto;
+    text-align: center;
+    font-size: clampF(20, 36);
+    padding: clampF(20, 36);
+    font-family: 'Caladea', sans-serif;
+    font-weight: 700;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: minF(16);
+    color: #fbfafa;
+    text-shadow: 0 clampF(2, 6) 0 #240000;
+    letter-spacing: minF(2);
+  }
+
+  &__wrapper {
+    padding: 0 20px 260 * $dw;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 242px);
+    grid-template-rows: repeat(1, 1fr);
+    justify-content: flex-start;
+    grid-gap: 24 * $dw;
+    @extend %scrollBar;
+    //opacity: 0;
+    //animation: opacityCardBlock 0.1s linear forwards;
+    @extend %smoothScroll;
+  }
+
+  &__item {
+    @extend %cardBlockItem;
+    position: relative;
+
+    .towerFrame {
+      aspect-ratio: 99/133;
+      width: calc(99 / 276 * 100%);
+      flex: none;
+      background-color: #d88317;
+    }
+
+    .panelParer {
+      flex: 1;
+    }
+  }
+}
+
+.cardNFT {
+  //--levelSlotBg: url(~src/assets/images/deckBuilder/levelBanner.png);
+  position: relative;
+  cursor: pointer;
+  z-index: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  &:hover {
+    .cardNFT__info {
+      opacity: 1;
+      transition: opacity 0.2s;
+      pointer-events: all;
+    }
+  }
+
+  &--tower {
+    aspect-ratio: 242/300;
+    --var: tower;
+    //--nft_locked: url(~src/assets/images/deckBuilder/nftTowerLocked.png);
+    //--nft_noEnergy: url(~src/assets/images/deckBuilder/nftTowerNoEnergy.png);
+    //--plus: url(~src/assets/images/deckBuilder/slot/tower-slot/plus_Frame.png);
+    //--locked: url(~src/assets/images/deckBuilder/slot/tower-slot/lock_Frame.png);
+  }
+
+  &--spell {
+    aspect-ratio: 242/274;
+    --var: spell;
+    //--nft_locked: url(~src/assets/images/deckBuilder/nftSpellLocked.png);
+    //--nft_noEnergy: url(~src/assets/images/deckBuilder/nftSpellNoEnergy.png);
+    //--plus: url(~src/assets/images/deckBuilder/spellPlus.png);
+    //--locked: url(~src/assets/images/deckBuilder/spellLocked.png);
+
+    .cardNFT__infoBlock {
+      top: 8%;
+      width: 22%;
+    }
+
+    .cardNFT__name {
+      top: 73%;
+    }
+
+    .cardNFT__mana {
+      bottom: 4%;
+    }
+  }
+
+  &--lock {
+    background-image: var(--locked);
+  }
+
+  &--selected {
+    .cardNFT__image {
+      filter: grayscale(0.5) brightness(0.8);
+    }
+  }
+
+  &__image {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &--plus {
+    background-image: var(--plus);
+    filter: brightness(1);
+    transition: all 0.2s;
+    transform: scale(1);
+    cursor: pointer;
+
+    &.empty {
+      &:hover {
+        filter: brightness(1.2);
+      }
+
+      &:active {
+        filter: brightness(1.4);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  img {
+    object-fit: contain;
+    max-width: 100%;
+  }
+
+  &:before,
+  &:after {
+    content: '' !important;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.2s;
+    background-size: contain;
+    background-repeat: no-repeat;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  &:before {
+    background-image: var(--nft_noEnergy);
+  }
+
+  &:after {
+    background-image: var(--nft_locked);
+  }
+
+  &--locked {
+    .cardNFT__infoBlock {
+      filter: grayscale(1) brightness(80%);
+    }
+
+    &:after {
+      opacity: 1;
+    }
+  }
+
+  &--noEnergy {
+    .cardNFT__infoBlock {
+      filter: grayscale(1) brightness(50%);
+    }
+
+    &:before {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    z-index: 99;
+  }
+
+  &__rarityBg,
+  &__rarityFrame,
+  &__img,
+  &__imgSpell {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+  }
+
+  &__img {
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__imgSpell {
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__mana {
+    position: absolute;
+    bottom: 5%;
+    right: 48%;
+    transform: translateX(50%);
+    width: min-content;
+    min-width: 20px;
+    aspect-ratio: 62/22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+    gap: 2px;
+
+    img {
+      object-fit: contain;
+      width: 20px;
+      max-width: 100%;
+      position: absolute;
+      right: 100%;
+    }
+
+    span {
+      color: #ffffff;
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 22px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      letter-spacing: 2px;
+      text-indent: 2px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__infoBlock {
+    position: absolute;
+    right: 0;
+    top: 6.5%;
+    width: 22.32%;
+    height: fit-content;
+    z-index: 99;
+
+    &--left {
+      left: 0;
+      right: unset;
+    }
+  }
+
+  &__count {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 54/64;
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1;
+    text-align: center;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fbfafa;
+    background-image: url(~src/assets/images/deckBuilder/useFrame.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+
+    &--red {
+      font-size: 18px;
+      letter-spacing: unset;
+      aspect-ratio: 1;
+      //background-image: url(~src/assets/images/deckBuilder/useFrameRed.png);
+    }
+  }
+
+  &__level__slot {
+    position: relative;
+    z-index: 4;
+    width: 28%;
+    left: 68%;
+    margin-top: -100%;
+    aspect-ratio: 44/82;
+    text-transform: uppercase;
+    color: #f7d654;
+    background-image: var(--levelSlotBg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Caladea', sans-serif;
+
+    &--s {
+      font-size: 0.3125vw;
+      margin-top: 50%;
+    }
+
+    &--b {
+      letter-spacing: 2px;
+      text-shadow: 0 1px 0 #200000;
+      font-size: 0.7291666667vw;
+      font-weight: 700;
+    }
+  }
+
+  &__level {
+    position: relative;
+    z-index: 4;
+    width: 81%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -50%;
+    aspect-ratio: 44/82;
+    text-transform: uppercase;
+    color: #f7d654;
+    background-image: var(--levelSlotBg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Caladea', sans-serif;
+
+    &--s {
+      font-size: 10px;
+      margin-top: 20%;
+    }
+
+    &--b {
+      letter-spacing: 2px;
+      text-shadow: 0 1px 0 #200000;
+      font-size: 24px;
+      font-weight: 700;
+    }
+  }
+
+  &__name {
+    position: absolute;
+    top: 73%;
+    right: 10%;
+    width: 80%;
+    flex: none;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #fbfafa;
+    text-shadow: 0 1px 1px #360001;
+    z-index: 99;
+
+    &.longTextAnimation {
+      text-overflow: inherit;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 10px;
+        height: 100%;
+        backdrop-filter: blur(1px);
+      }
+
+      span {
+        position: absolute;
+        left: 10px;
+        transform: translate3d(0, 10px, 0);
+        animation: longTextAnimation 10s linear infinite;
+      }
+    }
+  }
+
+  &--hero {
+    aspect-ratio: 242/374;
+    --var: hero;
+    //--nft_locked: url(~src/assets/images/deckBuilder/nftSpellLocked.png);
+    //--nft_noEnergy: url(~src/assets/images/deckBuilder/nftHeroNoEnergy.png);
+    //--levelSlotBg: url(~src/assets/images/deckBuilder/levelBannerHero.png);
+
+    &.cardNFT--noEnergy {
+      //--levelSlotBg: url(~src/assets/images/deckBuilder/levelBannerHeroNegative.png);
+
+      .cardNFT__infoBlock {
+        filter: none;
+      }
+
+      .cardNFT__level {
+        color: #598dae;
+        text-shadow: 0 1px 0 #02151e;
+
+        &--b {
+          text-shadow: 0 2px 0 #02151e;
+        }
+      }
+    }
+
+    .cardNFT__infoBlock {
+      top: 8%;
+      width: 34%;
+
+      &--left {
+        width: 28.5%;
+      }
+    }
+
+    .cardNFT__level {
+      margin-top: -2%;
+      aspect-ratio: 64/93;
+
+      &--s {
+        font-size: 14px;
+        margin-top: 0;
+      }
+
+      &--b {
+        font-size: 28px;
+        text-indent: 4px;
+      }
+    }
+
+    .cardNFT__name {
+      top: 74.1%;
+    }
+
+    .cardNFT__mana {
+      bottom: 4%;
+    }
+  }
+}
+
+.noEnergyBlock {
+  width: calc(320 / 624 * 100%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+
+  &__timer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: clamp(10px, minF(20), 20px);
+    font-weight: 700;
+    letter-spacing: minF(1);
+    color: #ffffff;
+    margin-bottom: minF(-8);
+  }
+
+  &__timerLogo {
+    width: clamp(12px, minF(25), 25px);
+    aspect-ratio: 25/24;
+    //background-image: url(~src/assets/images/deckBuilder/timer.png);
+    @extend %CNRBGimage;
+    flex: none;
+  }
+
+  &__icon {
+    width: 100%;
+    aspect-ratio: 1;
+    //background-image: url(~src/assets/images/deckBuilder/noEnergyIconWrapper.png);
+    @extend %CNRBGimage;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: calc(123 / 350 * 100%);
+      //background-image: url(~src/assets/images/deckBuilder/noEnergyIconElement.png);
+      @extend %CNRBGimage;
+      transform: translate(-50%, -46%);
+      aspect-ratio: 123/163;
+      transition: all 0.2s;
+      clip-path: inset(100% 0% 0%);
+      animation: clipPath 5s linear infinite alternate;
+      @keyframes clipPath {
+        from {
+          clip-path: inset(100% 0% 0%);
+        }
+        to {
+          clip-path: inset(0% 0% 0%);
+        }
+      }
+    }
+  }
+}
+
+.mobile {
+  .cardBlock__wrapper {
+    padding: 0 8px 32 * $dwM;
+    grid-template-columns: repeat(auto-fit, 104px);
+    grid-template-rows: repeat(auto-fit, 128px);
+    grid-gap: 14 * $dwM 7 * $dwM;
+    overscroll-behavior: contain;
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .cardNFT {
+    &__name {
+      font-size: 10px;
+      line-height: 10px;
+    }
+
+    &__infoBlock {
+      width: 26.925%;
+    }
+
+    &__count {
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    &__level {
+      &--s {
+        margin-top: 36%;
+        font-size: 7px;
+      }
+
+      &--b {
+        font-size: 14px;
+        letter-spacing: 0;
+      }
+    }
+
+    &__mana {
+      display: none;
+    }
+  }
+}
+
+.cardBlock.mobile {
+  height: unset;
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}

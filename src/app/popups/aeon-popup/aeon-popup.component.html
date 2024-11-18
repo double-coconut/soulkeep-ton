@@ -1,0 +1,6 @@
+<div class="aeon-popup-wrapper">
+  <div class="close-button" (click)="close$.emit(inputData?.transaction.transactionId)"></div>
+<div class="aeon-popup-wrapper--content">
+  <iframe width="100%" height="100%" [frameBorder]="0" [src]="inputData?.transaction?.url || '' | safeUrl"></iframe>
+</div>
+</div>

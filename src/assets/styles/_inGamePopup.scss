@@ -1,0 +1,595 @@
+@use 'variables' as *;
+@use 'rarityElement' as *;
+
+.game-wrapper {
+  $self: &;
+  position: relative;
+  user-select: none;
+
+  &__aspect-ratio {
+    display: block;
+
+    img {
+      display: block;
+      max-width: 100%;
+      max-height: var(--app-height);
+    }
+  }
+
+  &--mobile {
+    height: 95%;
+    overflow: hidden;
+
+    #{$self}__aspect-ratio {
+      height: 100%;
+      overflow: hidden;
+
+      img {
+        display: none;
+      }
+
+      &:before {
+        content: '';
+        display: block;
+        height: 100%;
+        aspect-ratio: 1;
+      }
+    }
+
+    &#{$self}--defeated {
+      .media-wrapper {
+        .imageWrapper {
+          top: 16.5%;
+        }
+      }
+    }
+
+    .game-content {
+      &__media {
+        .media-wrapper__portal,
+        .media-wrapper__portal.animation {
+          display: none;
+        }
+
+        .media-wrapper__flag,
+        .media-wrapper__main-bg {
+          top: 14%;
+        }
+
+        .media-wrapper__blood {
+          top: 3.6%;
+        }
+
+        .media-wrapper__status {
+          top: 16%;
+        }
+
+        .media-wrapper__title {
+          top: 52%;
+        }
+
+        .gameContentFrame {
+          top: 0;
+          height: 100%;
+        }
+      }
+
+      .game-content__cards {
+        top: 61%;
+        gap: 20px;
+      }
+
+      .media-wrapper__title--two {
+        top: 64%;
+      }
+
+      .game-content__rewards {
+        top: 72%;
+      }
+
+      .media-wrapper__lower-button {
+        top: 90%;
+      }
+
+    }
+  }
+
+  &__content {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    z-index: 1;
+
+    //priority on graphic card
+    transform: translate(0);
+    contain: paint;
+    &.paint-unset {
+      contain: unset;
+    }
+  }
+
+  &--victory {
+    .media-wrapper__status--victory {
+      display: block;
+    }
+  }
+
+  &--victory-bonus {
+    .media-wrapper__status--victory-bonus {
+      display: block;
+    }
+    .game-for-tournament {
+      top: 65% !important;
+    }
+    .media-score-next {
+      top: 60% !important;
+    }
+  }
+
+  &--wave {
+    .media-wrapper__status--wave {
+      display: block;
+    }
+  }
+
+  &--defeated {
+    .media-wrapper__status--defeated {
+      display: block;
+    }
+
+    .drop {
+      display: block !important;
+    }
+  }
+}
+
+.game-content {
+  &__media {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  &__cards {
+    width: 78%;
+    position: absolute;
+    left: 50%;
+    top: 61%;
+    transform: translateX(-50%);
+    list-style-type: none;
+    padding: 0 0 0.5%;
+    margin: 0;
+
+    .rarityElement {
+      flex: 1 1 0;
+    }
+  }
+
+  &__rewards {
+    width: 80%;
+    position: absolute;
+    left: 50%;
+    top: 73%;
+    transform: translateX(-50%);
+    list-style-type: none;
+    padding: 0 0 0.5%;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clampF(8, 24);
+
+    .league__reward {
+      width: clampF(80, 172);
+      padding-right: clampF(10, 30);
+      margin: 0;
+      font-size: clampF(12, 20);
+    }
+  }
+}
+
+.gameContentFrame {
+  position: absolute;
+  top: 19.8%;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  z-index: 1;
+  aspect-ratio: 275/266;
+  object-fit: contain;
+}
+
+.media-wrapper {
+  img {
+    user-select: none;
+    pointer-events: none;
+  }
+
+  &__main-bg {
+    position: absolute;
+    top: 28%;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+
+  &__flag {
+    width: 31.17%;
+    position: absolute;
+    top: 27%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+
+  &__portal {
+    width: 55.5%;
+    display: block;
+    top: 4.27%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+    &.animation {
+      -webkit-user-select: none;
+      user-select: none;
+      pointer-events: none;
+      will-change: transform;
+      object-fit: contain;
+      clip-path: circle(28% at 50% 52%);
+      animation: rotateO 6s infinite linear;
+      transform-origin: 50% 53%;
+      opacity: 0.6;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    top: 55%;
+    width: 54.45%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &--two {
+      top: 67%;
+    }
+
+    &::before {
+      content: attr(data-title);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      text-transform: uppercase;
+      font-family: 'Roboto', sans-serif;
+      font-size: clampF(8, 16);
+      color: #fcfcfd;
+      text-shadow: 0 1px 0 #000000;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  &__blood {
+    width: 52.7%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 20.6%;
+    margin: 0 auto;
+    z-index: 1;
+    display: block;
+
+    &::before {
+      content: attr(data-wave);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto', sans-serif;
+      white-space: nowrap;
+      color: #ffe1a4;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 67%;
+      text-shadow: 0 1px 0 #00111c;
+      text-transform: uppercase;
+      font-size: clampF(6, 24);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .imageWrapper {
+    position: relative;
+    width: 73.436%;
+    top: 28%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .drop {
+      width: 2.2%;
+      aspect-ratio: 1;
+      border-radius: 0 100% 100% 100%;
+      background: linear-gradient(120deg, #fc422d, #71140d);
+      position: absolute;
+      top: 66%;
+      z-index: 9;
+      animation: drop 3s infinite both;
+      display: none;
+
+      &:nth-child(2) {
+        left: 7.2%;
+      }
+
+      &:nth-child(3) {
+        left: 24%;
+        animation-delay: -0.4s;
+      }
+
+      &:nth-child(4) {
+        left: 49%;
+        animation-delay: -1.5s;
+      }
+
+      &:nth-child(5) {
+        left: 80.5%;
+        animation-delay: -0.8s;
+      }
+
+      &:nth-child(6) {
+        left: 91.5%;
+        animation-delay: -1.3s;
+      }
+    }
+  }
+
+  &__status {
+    position: absolute;
+    top: 28%;
+    width: 73%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+
+    &--victory-bonus {
+      width: 68%;
+      top: 30%;
+    }
+
+    &--wave {
+      width: 69.855%;
+      top: 30%;
+    }
+
+    &--defeated {
+      width: 100%;
+      top: 28%;
+      position: relative;
+      z-index: 99;
+    }
+  }
+
+  &__lower-button {
+    position: absolute;
+    top: 85%;
+    width: clampF(53, 159);
+
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    cursor: pointer;
+
+    &.exit {
+      &::before {
+        top: 10%;
+      }
+    }
+
+    &::before {
+      content: attr(data-btn-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 70%;
+      position: absolute;
+      top: 14%;
+      left: 0;
+      font-family: 'Caladea', sans-serif;
+      font-size: clampF(16, 32);
+      text-transform: uppercase;
+      color: #fcfcfd;
+      text-shadow: 0 minF(2) 0 #03273c;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__retreat {
+    position: absolute;
+    top: 85%;
+    left: 13%;
+    z-index: 1;
+
+    .btn__deckButton__iconBlock {
+      background-image: url(~src/assets/images/btn/retreatIcon.png);
+      left: clampF(-58, -15) !important;
+      top: clampF(-20, -5);
+    }
+
+  }
+  .top_more{
+    top: 87% !important;
+  }
+
+  &__battle {
+    position: absolute;
+    top: 87%;
+    right: 13%;
+    z-index: 1;
+
+    .btn__deckButton__iconBlock {
+      background-image: url(~src/assets/images/btn/keepIcon.png);
+      right: clampF(-72, -18) !important;
+      top: clampF(-20, -5);
+    }
+
+    .btn__deckButton__inner span {
+      font-size: clampF(8, 24) !important;
+    }
+  }
+
+  &__battle,
+  &__retreat {
+    .btn__deckButton {
+      //width: clamp(175 * $dw,175 ,175px);
+      width: clampF(60, 240);
+    }
+
+    .btn__deckButton__inner span {
+      font-size: clampF(8, 20);
+      text-shadow: none !important;
+      letter-spacing: 0 !important;
+    }
+
+    .btn__deckButton__iconBlock:before {
+      content: none !important;
+    }
+
+    .btn__deckButton__iconBlock {
+      width: clampF(27, 107);
+      aspect-ratio: 1;
+    }
+  }
+}
+
+.game-cards {
+  display: flex;
+  gap: 0 2.5%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: center;
+
+  .rarityElement {
+    &__logo {
+      width: clampF(34, 90);
+    }
+
+    &__name {
+      font-size: clampF(8, 24);
+    }
+
+    &__count {
+      font-size: clampF(10, 20);
+      width: 100%;
+    }
+  }
+}
+
+@media (hover: hover) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #db801e;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: darken(#db801e, 10%);
+  }
+}
+
+.bonus-level-info {
+  font-size: clampF(8, 16);
+  line-height: clampF(12, 24);
+  position: absolute;
+  top: 39%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  background-color: #042735CC;
+  text-transform: uppercase;
+  padding: 8px;
+  margin: 0;
+  width: 100%;
+}
+
+.title-tournament {
+  .bonus-container {
+    position: relative;
+  }
+
+  .score-wrapper {
+    background-image: url(../images/webPopup/inGamePopup/bonus-bg.png);
+    background-size: 100% 120%;
+    position: absolute;
+    top: 45%;
+    width: clampF(150, 300);
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    padding:  clampF(7, 14) clampF(11, 22);
+    font-family: Caladea, sans-serif;
+    font-size: clampF(12, 24);
+    font-weight: 700;
+    line-height: clampF(14, 36);
+    color: #FFFFFF;
+
+    .score-title {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .small-bonus {
+      position: relative;
+
+      div {
+        padding: clampF(6, 10) 14px;
+        background-size: 100% 100%;
+        background-image: url(../images/webPopup/inGamePopup/small-bonus.png);
+        color: #FFFFFF;
+        font-family: Caladea, sans-serif;
+        font-size: clampF(14, 18);
+        font-weight: 700;
+        line-height: clampF(18, 22);
+        position: absolute;
+        right: clampF(-15, -24);
+        top: 5px;
+      }
+    }
+  }
+
+  .media-score-next {
+    top: 49% !important;
+  }
+}

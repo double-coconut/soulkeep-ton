@@ -1,0 +1,32 @@
+@use 'variables' as *;
+.titleFrame {
+  flex: none;
+  width: 100%;
+  margin-top: 10.6%;
+  aspect-ratio: 596/132;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-image: url(../images/home/difficultyTitleImg.png);
+  @extend %CNRBGimage;
+  font-family: 'Caladea', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  /* identical to box height, or 119% */
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  /* Text/White */
+  color: #fcfcfd;
+  user-select: none;
+  svg {
+    position: absolute;
+    top: -29%;
+    pointer-events: none;
+    user-select: none;
+    textPath {
+    }
+  }
+  padding-top: 3%;
+}

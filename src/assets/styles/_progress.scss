@@ -1,0 +1,150 @@
+@use 'variables' as *;
+
+.progressBar {
+  width: 100%;
+  aspect-ratio: 280/37;
+  background-image: url(../images/home/progressBarWrapper.png);
+  @extend %CNRBGimage;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  &.lineVisible {
+    .progressBar__line {
+      visibility: visible;
+    }
+  }
+  &--content {
+    &:before {
+      content: '';
+      position: absolute;
+      aspect-ratio: 108/70;
+      width: calc(80 / 560 * 100%);
+      transform: translateX(-50%);
+      left: 50%;
+      top: -103%;
+      z-index: 8;
+      background-size: contain;
+    }
+
+    &:after {
+      content: attr(dataLevel);
+      position: absolute;
+      aspect-ratio: 139/27;
+      width: calc(139 / 168 * 100%);
+      transform: translateX(-50%);
+      font-family: 'Caladea', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: clampF(8, 24);
+      line-height: 117%;
+      padding-top: 1.5%;
+      text-align: center;
+      letter-spacing: 0.04em;
+
+      /* Text/White */
+      color: #fcfcfd;
+      text-shadow: 0 1px 0 #200505;
+      left: 50%;
+      top: -55%;
+      z-index: -1;
+      background-image: url(../images/home/progressTopBar.png);
+      @extend %CNRBGimage;
+    }
+  }
+
+  &__inner {
+    position: absolute;
+    width: 96.7%;
+    top: 9%;
+    left: 1.7%;
+    height: 79.5%;
+    background: rgb(39 6 7);
+    clip-path: polygon(0 0, 100% 0, 96.3% 100%, 3.7% 100%);
+    z-index: 6;
+  }
+
+  &__slide {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: url(../images/home/bloodBarFull.png) repeat-x center;
+    background-size: auto 120%;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      aspect-ratio: 1;
+      transform: translateX(40%);
+      background-image: url(../images/home/bloodJarEffect.png);
+      background-size: auto 100%;
+      background-repeat: no-repeat;
+      z-index: 1;
+    }
+  }
+
+  &__lines {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly;
+    pointer-events: none;
+  }
+
+  &__line {
+    visibility: hidden;
+    flex: none;
+    height: 100%;
+    aspect-ratio: 2/18;
+    background-image: url(../images/home/bloodJarActive.png);
+    background-size: contain;
+    background-repeat: repeat-y;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    &:after {
+      z-index: 4;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      background-image: url(../images/home/bloodJar.png);
+      background-size: contain;
+      background-repeat: repeat-y;
+    }
+
+    &--active {
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__content {
+    position: relative;
+    z-index: 9;
+    font-family: 'Caladea', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    text-align: center;
+
+    text-transform: uppercase;
+    color: #fcfcfd;
+    text-shadow: 0 4px 0 #200505;
+    @media screen and (max-width: #{$mediaSm}) {
+      font-size: 14px;
+      text-shadow: 0 1px 0 #200505;
+    }
+  }
+}

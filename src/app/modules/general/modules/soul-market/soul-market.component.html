@@ -1,0 +1,40 @@
+<div class="league soulshop soul-buy">
+
+  <div class="league__wrapper">
+
+    <div class="league__border"></div>
+
+    <div class="league__content ">
+
+      <app-tab-buttons
+        [buttonsText]="[SoulTab.SOULS_BUY]"
+        [buttonValue]="currentTab"
+        (changeBottom)="handleChangePageValue($event)"
+      >
+        <div class="ticketOrSoul ticketOrSoul--indentationRight  indentationBottom">
+
+        <app-souls-balance></app-souls-balance>
+
+        </div>
+      </app-tab-buttons>
+
+      <div class="titleGlobal">
+        <div class="titleGlobal__soulshop">
+          <div class="titleGlobal__soulshop--info mb-4">
+            <h3>Soul gems</h3>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="soulshop-body">
+        <div class="soulshop-body-in">
+
+          <app-souls-buy *ngIf="currentTab === SoulTab.SOULS_BUY"></app-souls-buy>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

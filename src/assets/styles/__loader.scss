@@ -1,0 +1,50 @@
+@use 'variables' as *;
+.loading {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  @media screen and (max-width: #{$mediaXs}) {
+    gap: 3%;
+  }
+
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: url('../images/home/bg.jpeg') no-repeat center top;
+  background-size: cover;
+
+  @media screen and (max-width: #{$mediaXs}) and (orientation: portrait) {
+    background: url('../images/home/bgM.png') no-repeat center top;
+    background-size: cover;
+  }
+
+  z-index: 99999;
+
+  .logoBlock {
+    flex-basis: 38%;
+  }
+
+  &__frame {
+    max-width: 970px;
+    width: 80%;
+    flex: none;
+    aspect-ratio: 970/44;
+    padding: min(calc(5 / 970 * 100%), 5px);
+    background-image: url(../images/home/loadingFrame.png);
+    background-size: 100% 100%;
+    @media screen and (max-width: #{$mediaXs}) {
+      max-width: 560px;
+    }
+  }
+
+  &__bar {
+    height: 100%;
+    background-size: cover;
+    background-image: url(../images/home/loadingBar.png);
+    transition: width 1s linear;
+  }
+}

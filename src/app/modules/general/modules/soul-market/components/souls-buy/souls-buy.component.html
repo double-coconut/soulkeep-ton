@@ -1,0 +1,15 @@
+<div class="soul-buy-wrapper">
+
+  <div class="soul-buy-wrapper--item"
+  *ngFor="let soul of souls | sortTransform; let i = index"
+  >
+    <div class="soul-buy-wrapper--item--text">X{{soul.amount}}</div>
+    <div class="soul-buy-wrapper--item--image soul_{{i + 1 > 3 ? 3 : i + 1}}">
+
+    </div>
+    <div class="soul-buy-wrapper--item--button-container">
+      <button (click)="handleBySouls(soul.id)">$ {{soul.price}}</button>
+    </div>
+  </div>
+
+</div>

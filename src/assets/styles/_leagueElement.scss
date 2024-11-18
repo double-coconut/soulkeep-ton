@@ -1,0 +1,205 @@
+@use 'variables' as *;
+@use '_avatar';
+.leagueElement {
+  @media screen and (min-width: $mediaSm) and (min-height: $mediaT) {
+    width: minF(264);
+    min-width: 15.6%;
+  }
+  @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+    width: 152px;
+  }
+  @media screen and (max-width: 824px), (max-height: $mediaH) {
+    width: 126px;
+  }
+  @media screen and (max-width: 600px) and (orientation: portrait) {
+    width: 212px;
+  }
+  &:first-child {
+    @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+      margin-left: 75px;
+    }
+    @media screen and (max-width: 824px), (max-height: $mediaH) {
+      margin-left: 66px;
+    }
+  }
+  scroll-snap-type: both;
+  scroll-snap-stop: always;
+  scroll-snap-align: end;
+  position: relative;
+  width: 126px;
+  height: calc(100% - 8px);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+
+  cursor: pointer;
+  &--locked {
+    filter: grayscale(1);
+  }
+
+  &--selected {
+    .leagueElement__bg:before {
+      opacity: 1;
+    }
+    .leagueElement__title {
+      color: #eebd53;
+      filter: brightness(1.5);
+      scale: 1.1;
+    }
+
+    &:after {
+      opacity: 1 !important;
+      transform: translateX(-50%) !important;
+    }
+    & ~ .leagueElement {
+      &:after {
+        transform: translateX(-200%);
+      }
+    }
+  }
+
+  &--unlocked .leagueElement__bg:after {
+    opacity: 1;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: calc(104 / 240 * 100%);
+    aspect-ratio: 104/41;
+    background-image: url(~src/assets/images/league/selectionArrow.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 99;
+    opacity: 0;
+    left: 50%;
+    transform: translateX(100%);
+    transition: transform 0.2s;
+  }
+
+  &__bg {
+    inset: 0;
+    position: absolute;
+    background-origin: content-box;
+    background-image: url(~src/assets/images/league/bgLeagueElement.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 1;
+    @media screen and (min-width: $mediaSm) and (min-height: $mediaT) {
+      padding: 0 minF(10);
+    }
+    @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+      padding: 0 4px;
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transition: opacity 0.2s;
+      background-origin: content-box;
+
+      @media screen and (min-width: $mediaSm) and (min-height: $mediaT) {
+        padding: 0 minF(10);
+      }
+      @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+        padding: 0 4px;
+      }
+    }
+
+    &:before {
+      z-index: 2;
+      background-image: url(~src/assets/images/league/bgLeagueElementSelected.png);
+    }
+
+    &:after {
+      z-index: 3;
+      background-image: url(~src/assets/images/league/bgLeagueElementUnlocked.png);
+    }
+  }
+
+  &__title {
+    width: 100%;
+    aspect-ratio: 264/136;
+    background-image: url(~src/assets/images/league/nameHolder.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    color: rgba(238, 189, 83, 0.7);
+    transition: all 0.2s;
+    @media screen and (min-width: $mediaSm) and (min-height: $mediaT) {
+      padding: minF(8) 0;
+      font-size: minF(28);
+      letter-spacing: minF(2);
+      text-shadow: minF(2) minF(2) #260304;
+    }
+    @media screen and (max-width: $mediaSm), (max-height: $mediaT) {
+      padding: 5px 0;
+      font-size: 18px;
+      letter-spacing: 0.04em;
+    }
+    @media screen and (max-width: 824px), (max-height: $mediaH) {
+      font-size: 14px;
+    }
+    @media screen and (max-width: 600px) and (orientation: portrait) {
+      font-size: 22px;
+    }
+  }
+
+  &__status {
+    width: 17.05%;
+    aspect-ratio: 1;
+    position: absolute;
+    top: 56%;
+    transform: translateX(-50%);
+    left: 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &--locked {
+      background-image: url(~src/assets/images/league/status/locked.png);
+    }
+
+    &--completed {
+      background-image: url(~src/assets/images/league/status/completed.png);
+    }
+
+    &--unlocked {
+      background-image: url(~src/assets/images/league/status/unlocked.png);
+    }
+  }
+
+  .progressBar {
+    z-index: 9;
+    width: 100%;
+    margin: 20% auto 0;
+  }
+  .unlockButton {
+    z-index: 9;
+    width: 100%;
+    aspect-ratio: 172/72;
+    margin: 10% auto 0;
+    background-image: url(~src/assets/images/league/Unlock.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.2s;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    &:active {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+  }
+}

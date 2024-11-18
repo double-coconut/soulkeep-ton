@@ -1,0 +1,274 @@
+@use 'variables' as *;
+
+.spsBlock {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .tooltipIcon {
+    display: inline-block;
+    width: minF(30);
+    vertical-align: middle;
+    margin-left: minF(16);
+  }
+
+  &__titleWrapper {
+    &:first-child {
+      margin-top: auto;
+    }
+
+    &--mb {
+      margin-bottom: auto !important;
+    }
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: minF(24);
+
+    .spsBlock__title {
+      margin-bottom: 0;
+    }
+  }
+
+  &__title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: minF(32);
+    line-height: minF(40);
+    letter-spacing: minF(2);
+    margin-bottom: minF(16);
+    color: #ffffff;
+    text-transform: uppercase;
+
+    &--color {
+      color: #1d88b4;
+    }
+
+    &--mt {
+      margin-top: minF(60);
+    }
+
+    &--mb {
+      margin-bottom: minF(48);
+    }
+
+    &--ml {
+      margin-left: minF(48);
+    }
+  }
+
+  &__subTitle {
+    font-weight: 400;
+    font-size: minF(18);
+    line-height: minF(24);
+    text-align: center;
+    letter-spacing: minF(1);
+    text-transform: uppercase;
+    color: #2095c4;
+    margin-bottom: minF(24);
+    max-width: minF(1000);
+
+    a {
+      color: #fbfafa;
+    }
+  }
+
+  &__progress {
+    display: grid;
+    grid-template-columns: 1fr minF(480) 1fr;
+    grid-column-gap: minF(24);
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__progressBar {
+    max-width: minF(480);
+    width: 100%;
+    aspect-ratio: 480/64;
+    position: relative;
+    background-image: url(~src/assets/images/deckBuilder/progressSps.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    grid-column-start: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-style: normal;
+    font-weight: 700;
+    font-size: minF(24);
+    line-height: 1;
+    letter-spacing: minF(2);
+    text-transform: uppercase;
+    padding: 0 2.5% 1%;
+    color: #ffffff;
+
+    span {
+      position: relative;
+      z-index: 9;
+      pointer-events: none;
+    }
+  }
+
+  &__progressBarLine {
+    position: absolute;
+    height: 82%;
+    left: 1.05%;
+    width: 97.5%;
+    border-radius: minF(4);
+    top: 6.8%;
+    overflow: hidden;
+    user-select: none;
+    cursor: pointer;
+  }
+
+  &__progressBarLineInner {
+    height: 100%;
+    background-image: url(~src/assets/images/deckBuilder/progressSpsBar.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 10%;
+  }
+
+  &__progressData {
+    justify-self: baseline;
+    display: flex;
+    align-items: center;
+    gap: minF(8);
+
+    span {
+      font-weight: 700;
+      font-size: minF(24);
+      line-height: 1;
+      letter-spacing: minF(2);
+      color: #ffffff;
+    }
+  }
+
+  &__progressDataIcon {
+    flex: none;
+    aspect-ratio: 1;
+    width: minF(48);
+    background-image: url(~src/assets/images/deckBuilder/iconSps.png);
+    @extend %CNRBGimage;
+  }
+
+  &__potential {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: minF(24);
+    border: 1px solid #2095C4;
+    background-color: rgba(#09AFC7, .1);
+    border-radius: minF(12);
+    min-width: minF(372);
+    text-transform: uppercase;
+
+    &--text {
+      font-weight: 700;
+      font-size: minF(24);
+      line-height: 1;
+      letter-spacing: minF(2);
+      color: #ffffff;
+      display: block;
+      padding-top: minF(8);
+    }
+
+    &--blue {
+      color: #2095C4;
+    }
+  }
+
+  &__btn {
+    margin: minF(32) 0;
+    width: minF(168);
+    .btn__default__inner {
+      font-size: minF(24);
+    }
+  }
+
+  .league__block__content {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: minF(24);
+    flex: none;
+    margin: minF(8) 0;
+
+    .league__reward {
+      width: clampF(120, 172);
+      margin: 0;
+      font-size: clampF(12, 20);
+    }
+  }
+
+  .rarityElement {
+    &__logo {
+      width: clampF(60, 116);
+    }
+
+    &__name {
+      font-size: clampF(12, 22);
+    }
+
+    &__count {
+      font-size: clampF(12, 22);
+      width: 100%;
+    }
+  }
+}
+
+.spsBlockWrapper--mobile {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+
+  .spsBlock__title {
+    font-size: minF(40);
+    line-height: minF(48);
+    margin-top: auto;
+  }
+
+  .spsBlock__subTitle {
+    font-size: minF(24);
+    line-height: minF(30);
+  }
+
+  &-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    flex: 0 0 50%;
+    padding: 0 10px;
+  }
+
+  .spsBlock__btn {
+    width: minF(220);
+    margin: auto auto 0 auto;
+  }
+
+  .league__block__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px 16px;
+    padding-top: 16px;
+
+    .league__reward {
+      width: clampF(120, 240);
+      margin: 0;
+      font-size: clampF(14, 28);
+      padding-right: clampF(12, 24);
+    }
+  }
+}
